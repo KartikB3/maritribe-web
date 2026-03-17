@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.example.tpo_app",
+    "sha256_cert_fingerprints": [
+      "3A:84:CC:69:0B:1A:B4:E7:04:64:7C:C4:7F:DE:5F:54:08:9C:52:E4:B1:A5:3F:F6:E3:3C:B1:86:C1:38:8C:6F"
+    ]
+  }
+}]
