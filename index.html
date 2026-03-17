@@ -4,16 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maritribe — The Maritime Community</title>
+  <meta name="description" content="The social platform for maritime professionals. Connect with your alumni community.">
+  <meta property="og:title" content="Maritribe — The Maritime Community">
+  <meta property="og:description" content="Connect with your alumni community. As easy as WhatsApp, as powerful as LinkedIn.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maritribe.one">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bottle-green: #0F4A3C;
+      --jam: #551841;
+      --mint: #10B981;
+      --ivory: #F5F2E6;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #0F4A3C 0%, #551841 100%);
+      background: linear-gradient(135deg, var(--bottle-green) 0%, var(--jam) 100%);
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       color: #fff;
+      padding: 24px;
     }
     .card {
       background: rgba(255,255,255,0.07);
@@ -21,39 +36,102 @@
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 24px;
       padding: 48px 36px;
-      max-width: 420px;
+      max-width: 440px;
+      width: 100%;
       text-align: center;
     }
     .logo {
-      width: 72px; height: 72px;
-      background: #10B981;
+      width: 80px; height: 80px;
+      background: var(--mint);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 32px; font-weight: 700;
+      margin: 0 auto 28px;
+      font-size: 36px; font-weight: 800;
     }
-    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-    .tagline { font-size: 15px; opacity: 0.8; margin-bottom: 32px; line-height: 1.5; }
+    h1 { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+    .tagline {
+      font-size: 16px;
+      opacity: 0.85;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    .subtitle {
+      font-size: 13px;
+      opacity: 0.5;
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+    .feature-icon {
+      width: 36px; height: 36px;
+      background: rgba(16,185,129,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .feature-text {
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
     .btn {
       display: inline-block;
-      background: #10B981;
+      background: var(--mint);
       color: #fff;
       text-decoration: none;
-      padding: 14px 32px;
+      padding: 14px 36px;
       border-radius: 12px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       transition: transform 0.15s;
+      width: 100%;
     }
-    .btn:hover { transform: scale(1.04); }
-    .footer { margin-top: 32px; font-size: 12px; opacity: 0.5; }
+    .btn:hover { transform: scale(1.02); }
+    .footer {
+      margin-top: 36px;
+      font-size: 12px;
+      opacity: 0.4;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">M</div>
     <h1>Maritribe</h1>
-    <p class="tagline">The social platform for maritime professionals.<br>Connect with your alumni community.</p>
+    <p class="tagline">The social platform for maritime professionals.</p>
+    <p class="subtitle">As easy as WhatsApp, as powerful as LinkedIn — built for seafarers and maritime alumni.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">&#9875;</div>
+        <div class="feature-text">Join communities by department, batch, or interest</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#128274;</div>
+        <div class="feature-text">Privacy-first — no phone number exposure</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#128172;</div>
+        <div class="feature-text">Searchable discussions that don't get lost in group chats</div>
+      </div>
+    </div>
+
     <a class="btn" href="#">Coming Soon on Play Store</a>
     <p class="footer">Built with care for maritime alumni</p>
   </div>
