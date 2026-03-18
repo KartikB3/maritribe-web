@@ -411,7 +411,7 @@
     // ── Post View ──
     async function renderPost(postId) {
       try {
-        const res = await fetch(API_BASE + '/posts/' + postId + '/public');
+        const res = await fetch(API_BASE + '/public/posts/' + postId);
         if (res.status === 403) {
           renderError('Private Community', 'This post belongs to a private community and cannot be viewed on the web.');
           return;
