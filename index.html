@@ -9,7 +9,12 @@
   <meta property="og:description" content="As easy as WhatsApp, as powerful as LinkedIn — built for maritime professionals.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://maritribe.one">
-  <meta property="og:image" content="">
+  <meta property="og:image" content="https://maritribe.one/og-preview.png">
+  <meta name="theme-color" content="#0A2E24">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maritribe — The Maritime Community">
+  <meta name="twitter:description" content="As easy as WhatsApp, as powerful as LinkedIn — built for maritime professionals.">
+  <meta name="twitter:image" content="https://maritribe.one/og-preview.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -76,6 +81,11 @@
     @keyframes countUp {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollHint {
+      0%, 100% { opacity: 0.4; transform: translateY(0); }
+      50% { opacity: 0.8; transform: translateY(8px); }
     }
 
     .anim-fade-up {
@@ -319,6 +329,11 @@
       padding: 32px 28px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .problem-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
     .problem-card--before {
       background: #FEF2F2;
@@ -456,6 +471,59 @@
       }
     }
 
+    /* ── Testimonial section ── */
+    .testimonial-section {
+      background: #fff;
+      text-align: center;
+    }
+    .testimonial-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(20px, 3vw, 28px);
+      line-height: 1.5;
+      color: var(--deep-teal);
+      max-width: 600px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    .testimonial-quote::before {
+      content: '\201C';
+      font-size: 64px;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: -20px;
+      left: -16px;
+      line-height: 1;
+      font-family: 'DM Serif Display', serif;
+    }
+    .testimonial-author {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .testimonial-author span {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .testimonial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15,74,60,0.06);
+      border: 1px solid rgba(15,74,60,0.1);
+      border-radius: 100px;
+      padding: 8px 20px;
+      margin-top: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--bottle-green);
+    }
+    .testimonial-badge svg {
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+    }
+
     /* ── Stats section ── */
     .stats-section {
       background: var(--deep-teal);
@@ -554,6 +622,23 @@
     .cta-main-btn:hover, .cta-main-btn:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 8px 36px rgba(0,0,0,0.2);
+    }
+    .cta-btn-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .cta-btn-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      animation: pulseRing 2.5s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.15); opacity: 0; }
     }
 
     /* ── Footer ── */
@@ -666,6 +751,10 @@
           <div class="store-btn-text"><small>Get it on</small>Google Play</div>
         </a>
       </div>
+    </div>
+    <!-- Scroll hint -->
+    <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:scrollHint 2.5s ease-in-out infinite;opacity:0.4;z-index:1;" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </section>
 
@@ -781,14 +870,41 @@
     </div>
   </section>
 
-  <!-- Wave divider: features → stats -->
+  <!-- Wave divider: features → testimonial -->
   <svg class="wave-divider" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:var(--ivory);">
-    <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="var(--deep-teal)"/>
+    <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="#fff"/>
+  </svg>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section" aria-label="Testimonial">
+    <div class="section-inner">
+      <div class="anim-fade-up">
+        <div class="testimonial-quote">
+          Finally, a place where our batch conversations don't disappear and juniors can learn from seniors across departments.
+        </div>
+        <div class="testimonial-author">
+          &mdash; MANET Alumni, <span>Deck Department</span>
+        </div>
+        <div class="testimonial-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Trusted by MANET Alumni Network
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave divider: testimonial → stats -->
+  <svg class="wave-divider" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:#fff;">
+    <path d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z" fill="var(--deep-teal)"/>
   </svg>
 
   <!-- Stats Section -->
   <section class="stats-section" aria-label="Platform statistics">
     <div class="section-inner">
+      <div class="anim-fade-up" style="text-align:center;margin-bottom:40px;">
+        <div class="section-label" style="color:rgba(201,168,76,0.8);">By the Numbers</div>
+        <h2 style="font-size:clamp(24px,3.5vw,36px);color:#fff;line-height:1.2;">Growing stronger, together</h2>
+      </div>
       <div class="stats-grid">
         <div class="stat-item anim-fade-up">
           <div class="stat-number" data-target="3000" data-suffix="+">0</div>
@@ -831,7 +947,7 @@
       <div class="anim-fade-up">
         <h2>Join your alumni network</h2>
         <p>Your batch is already here. Connect with maritime professionals who share your journey.</p>
-        <a href="#" class="cta-main-btn">Download Maritribe</a>
+        <div class="cta-btn-wrap"><a href="#" class="cta-main-btn">Download Maritribe</a></div>
       </div>
     </div>
   </section>

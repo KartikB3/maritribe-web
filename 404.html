@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maritribe</title>
+  <meta name="description" content="Maritribe — the maritime community platform. Connect with alumni, join communities, and grow your professional network.">
+  <meta property="og:title" content="Maritribe">
+  <meta property="og:description" content="The maritime community platform — connect with alumni and professionals.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maritribe.one">
+  <meta property="og:image" content="https://maritribe.one/og-preview.png">
+  <meta name="theme-color" content="#0F4A3C">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -796,6 +803,7 @@
   <div class="site-footer">Built with care for maritime alumni</div>
 
   <script>
+    // Change this when switching environments (staging, production, etc.)
     const API_BASE = 'https://tribebackend.onrender.com';
     const app = document.getElementById('app');
     const loader = document.getElementById('loader');
@@ -963,6 +971,13 @@
         const readTime = readingTime(post.body);
 
         document.title = (post.title || 'Post') + ' — Maritribe';
+        // Dynamic OG tags for link previews
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        var ogDesc = document.querySelector('meta[property="og:description"]');
+        var ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogTitle) ogTitle.content = (post.title || 'Post') + ' — Maritribe';
+        if (ogDesc) ogDesc.content = (post.body || '').substring(0, 160);
+        if (ogImage && post.mediaUrls && post.mediaUrls.length > 0) ogImage.content = post.mediaUrls[0];
 
         hide(loader);
         showStickyBar();
