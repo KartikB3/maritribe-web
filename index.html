@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maritribe — The Maritime Community</title>
-  <meta name="description" content="The social platform for maritime professionals. Connect with your alumni community.">
-  <meta property="og:title" content="Maritribe">
+  <meta name="description" content="As easy as WhatsApp, as powerful as LinkedIn — built for maritime professionals.">
+  <meta property="og:title" content="Maritribe — The Maritime Community">
   <meta property="og:description" content="As easy as WhatsApp, as powerful as LinkedIn — built for maritime professionals.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://maritribe.one">
+  <meta property="og:image" content="">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bottle-green: #0F4A3C;
@@ -21,309 +23,912 @@
       --mint-light: #34D399;
       --ivory: #F5F2E6;
       --ivory-dark: #E7E3D6;
+      --gold: #C9A84C;
+      --deep-teal: #0A2E24;
       --text-primary: #111827;
       --text-secondary: #6B7280;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background: var(--ivory);
+      color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
     }
-    .hero {
-      background: var(--bottle-green);
-      position: relative;
-      overflow: hidden;
-      padding: 60px 24px 80px;
-      text-align: center;
+
+    /* ── Noise/grain texture overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes spinSlow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .anim-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .anim-fade-up { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(10, 46, 36, 0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+      padding: 10px 24px;
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
       color: #fff;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0; right: 0;
-      height: 48px;
-      background: var(--ivory);
-      border-radius: 48px 48px 0 0;
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--deep-teal);
+      font-weight: 400;
     }
-    /* Subtle compass rose watermark */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 280px; height: 280px;
-      border: 2px solid rgba(255,255,255,0.06);
-      border-radius: 50%;
+    .nav-logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      letter-spacing: 0.5px;
     }
+    .nav-cta {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .nav-cta:hover, .nav-cta:focus-visible {
+      background: var(--gold);
+      color: var(--deep-teal);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(170deg, var(--deep-teal) 0%, var(--bottle-green) 60%, #12574A 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 140px 24px 120px;
+      text-align: center;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-compass {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 550px;
+      height: 550px;
+      opacity: 0.04;
+      animation: spinSlow 120s linear infinite;
+      pointer-events: none;
+    }
+
     .hero-inner {
       position: relative;
       z-index: 1;
-      max-width: 520px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
-    .logo-circle {
-      width: 88px; height: 88px;
-      background: var(--ivory);
-      border: 3px solid var(--jam);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
-      position: relative;
-    }
-    .logo-text {
-      font-size: 32px;
-      font-weight: 900;
-      color: var(--bottle-green);
-      letter-spacing: -1px;
+    .hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      padding: 6px 18px;
+      border-radius: 4px;
+      animation: fadeInUp 0.8s ease both;
     }
 
     .hero h1 {
-      font-size: 36px;
-      font-weight: 900;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.1;
+      margin-bottom: 24px;
       letter-spacing: -0.5px;
-      margin-bottom: 12px;
     }
-    .hero .tagline {
-      font-size: 17px;
-      font-weight: 500;
-      opacity: 0.85;
-      line-height: 1.6;
-      margin-bottom: 8px;
-    }
-    .hero .sub {
-      font-size: 13px;
-      opacity: 0.5;
-      line-height: 1.5;
-    }
-
-    /* ── Content ── */
-    .content {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 0 20px 60px;
-    }
-
-    /* ── Pill tag ── */
-    .pill {
+    .hero h1 .word {
       display: inline-block;
-      background: var(--jam);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease both;
+    }
+    .hero h1 .word:nth-child(1) { animation-delay: 0.2s; }
+    .hero h1 .word:nth-child(2) { animation-delay: 0.35s; }
+    .hero h1 .word:nth-child(3) { animation-delay: 0.5s; }
+    .hero h1 .word:nth-child(4) { animation-delay: 0.65s; }
+
+    .hero-tagline {
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-weight: 400;
+      opacity: 0;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      max-width: 520px;
+      margin: 0 auto 40px;
+      animation: fadeIn 1s ease 0.9s both;
     }
 
-    /* ── Features ── */
-    .features {
+    .hero-ctas {
       display: flex;
-      flex-direction: column;
       gap: 14px;
-      margin-bottom: 36px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeInUp 0.7s ease 1.1s both;
     }
-    .feature {
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       background: #fff;
-      border: 1px solid var(--ivory-dark);
-      border-radius: 16px;
-      padding: 18px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-    .feature-dot {
-      width: 40px; height: 40px;
+      color: var(--deep-teal);
+      text-decoration: none;
+      padding: 14px 28px;
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: 20px;
-    }
-    .feature-dot.green { background: rgba(16,185,129,0.12); }
-    .feature-dot.jam { background: rgba(85,24,65,0.08); }
-    .feature-dot.blue { background: rgba(59,130,246,0.1); }
-    .feature h3 {
       font-size: 14px;
       font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 3px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
-    .feature p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.5;
+    .store-btn:hover, .store-btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .store-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .store-btn-text { text-align: left; line-height: 1.2; }
+    .store-btn-text small { font-size: 10px; font-weight: 500; opacity: 0.6; display: block; }
+
+    /* ── Wave divider ── */
+    .wave-divider {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: -1px;
+    }
+    .wave-divider-bottom {
+      margin-bottom: -1px;
     }
 
-    /* ── Comparison strip ── */
-    .compare {
-      background: #fff;
-      border: 1px solid var(--ivory-dark);
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin-bottom: 36px;
-      text-align: center;
+    /* ── Section shared ── */
+    section { position: relative; }
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 24px;
     }
-    .compare-title {
-      font-size: 13px;
+    .section-label {
+      font-size: 11px;
       font-weight: 700;
-      color: var(--text-secondary);
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 14px;
+      color: var(--gold);
+      margin-bottom: 16px;
     }
-    .compare-row {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--deep-teal);
     }
-    .compare-chip {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--ivory-dark);
+    .section-subtitle {
+      font-size: 16px;
       color: var(--text-secondary);
-    }
-    .compare-chip.strike {
-      text-decoration: line-through;
-      opacity: 0.45;
-    }
-    .compare-chip.active {
-      background: var(--bottle-green);
-      color: #fff;
-      border-color: var(--bottle-green);
-      text-decoration: none;
-      opacity: 1;
+      line-height: 1.7;
+      max-width: 540px;
     }
 
-    /* ── CTA ── */
-    .cta-box {
-      background: linear-gradient(135deg, var(--jam-light), var(--jam));
-      border-radius: 20px;
-      padding: 32px 24px;
-      text-align: center;
-      color: #fff;
+    /* ── Problem section ── */
+    .problem-section {
+      background: #fff;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .problem-card {
+      border-radius: 16px;
+      padding: 32px 28px;
       position: relative;
       overflow: hidden;
     }
-    .cta-box::after {
+    .problem-card--before {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+    }
+    .problem-card--after {
+      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(15,74,60,0.06));
+      border: 1px solid rgba(16,185,129,0.2);
+    }
+    .problem-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .problem-card--before .problem-card-label {
+      background: #FEE2E2;
+      color: #991B1B;
+    }
+    .problem-card--after .problem-card-label {
+      background: rgba(16,185,129,0.15);
+      color: var(--bottle-green);
+    }
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+    .problem-list li svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+    }
+    .problem-card--before .problem-list li { color: #7F1D1D; opacity: 0.8; }
+    .problem-arrow {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    @media (max-width: 640px) {
+      .problem-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* ── Features section ── */
+    .features-section {
+      background: var(--ivory);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: #fff;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(15,74,60,0.08);
+    }
+    .feature-card::after {
       content: '';
       position: absolute;
-      top: -30px; right: -30px;
-      width: 120px; height: 120px;
-      border: 2px solid rgba(255,255,255,0.08);
-      border-radius: 50%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--mint));
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-    .cta-box h2 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      position: relative;
-    }
-    .cta-box p {
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 22px;
-      line-height: 1.5;
-      position: relative;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: var(--mint);
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 36px;
+    .feature-card:hover::after { opacity: 1; }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
       border-radius: 14px;
-      font-size: 15px;
-      font-weight: 700;
-      position: relative;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 16px rgba(16,185,129,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
     }
-    .cta-btn:hover {
+    .feature-icon svg { width: 26px; height: 26px; }
+    .feature-icon--green {
+      background: rgba(16,185,129,0.1);
+      color: var(--mint);
+    }
+    .feature-icon--jam {
+      background: rgba(85,24,65,0.08);
+      color: var(--jam);
+    }
+    .feature-icon--gold {
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+    }
+    .feature-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--deep-teal);
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+
+    /* ── Stats section ── */
+    .stats-section {
+      background: var(--deep-teal);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      position: relative;
+    }
+    .stat-item { position: relative; }
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(40px, 5vw, 60px);
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+    .stat-divider {
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; gap: 32px; }
+      .stat-divider { display: none; }
+    }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--jam) 0%, var(--jam-light) 100%);
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section .section-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .cta-compass-deco {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 400px;
+      height: 400px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(30px, 4.5vw, 48px);
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .cta-section p {
+      font-size: 17px;
+      opacity: 0.8;
+      max-width: 480px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .cta-main-btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--jam);
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    }
+    .cta-main-btn:hover, .cta-main-btn:focus-visible {
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(16,185,129,0.4);
+      box-shadow: 0 8px 36px rgba(0,0,0,0.2);
     }
 
     /* ── Footer ── */
     .footer {
+      background: var(--deep-teal);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 24px;
       text-align: center;
-      padding: 28px 20px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      opacity: 0.6;
+      font-size: 13px;
+      position: relative;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--gold); }
+    .footer-divider {
+      width: 48px;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 20px auto;
+    }
+    .footer-compass {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      opacity: 0.3;
+      margin-bottom: 12px;
     }
 
-    /* ── Mobile tweaks ── */
-    @media (max-width: 400px) {
-      .hero { padding: 40px 20px 64px; }
-      .hero h1 { font-size: 28px; }
-      .logo-circle { width: 72px; height: 72px; }
-      .logo-text { font-size: 26px; }
+    /* ── Focus styles ── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <div class="hero">
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <a href="/" class="nav-logo" aria-label="Maritribe home">
+      <div class="nav-logo-mark">M</div>
+      <span class="nav-logo-text">Maritribe</span>
+    </a>
+    <a href="#" class="nav-cta">Get the App</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Introduction">
+    <!-- Compass rose SVG watermark -->
+    <svg class="hero-compass" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="#fff" stroke-width="1.5">
+        <circle cx="200" cy="200" r="190"/>
+        <circle cx="200" cy="200" r="160"/>
+        <circle cx="200" cy="200" r="60"/>
+        <!-- Cardinal points -->
+        <polygon points="200,10 210,180 200,160 190,180" fill="#fff" opacity="0.5"/>
+        <polygon points="200,390 210,220 200,240 190,220" fill="#fff" opacity="0.3"/>
+        <polygon points="10,200 180,190 160,200 180,210" fill="#fff" opacity="0.3"/>
+        <polygon points="390,200 220,190 240,200 220,210" fill="#fff" opacity="0.3"/>
+        <!-- Intercardinal points -->
+        <polygon points="66,66 185,175 170,170 175,185" fill="#fff" opacity="0.2"/>
+        <polygon points="334,66 225,175 230,170 215,185" fill="#fff" opacity="0.2"/>
+        <polygon points="66,334 175,225 170,230 185,215" fill="#fff" opacity="0.2"/>
+        <polygon points="334,334 225,225 215,230 230,215" fill="#fff" opacity="0.2"/>
+        <!-- Tick marks -->
+        <line x1="200" y1="10" x2="200" y2="30"/>
+        <line x1="200" y1="370" x2="200" y2="390"/>
+        <line x1="10" y1="200" x2="30" y2="200"/>
+        <line x1="370" y1="200" x2="390" y2="200"/>
+        <!-- Labels -->
+        <text x="200" y="52" text-anchor="middle" fill="#fff" font-size="16" font-family="DM Serif Display, serif" opacity="0.6">N</text>
+        <text x="200" y="362" text-anchor="middle" fill="#fff" font-size="16" font-family="DM Serif Display, serif" opacity="0.6">S</text>
+        <text x="48" y="205" text-anchor="middle" fill="#fff" font-size="16" font-family="DM Serif Display, serif" opacity="0.6">W</text>
+        <text x="356" y="205" text-anchor="middle" fill="#fff" font-size="16" font-family="DM Serif Display, serif" opacity="0.6">E</text>
+      </g>
+    </svg>
+
     <div class="hero-inner">
-      <div class="logo-circle">
-        <span class="logo-text">MT</span>
+      <div class="hero-label">Built for Maritime Professionals</div>
+      <h1>
+        <span class="word">Where </span>
+        <span class="word">Maritime </span>
+        <span class="word">Professionals </span>
+        <span class="word">Connect</span>
+      </h1>
+      <p class="hero-tagline">As easy as WhatsApp, as powerful as LinkedIn &mdash; built for the maritime industry.</p>
+      <div class="hero-ctas">
+        <a href="#" class="store-btn" aria-label="Download on the App Store">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <div class="store-btn-text"><small>Download on the</small>App Store</div>
+        </a>
+        <a href="#" class="store-btn" aria-label="Get it on Google Play">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.49c-.17-.1-.32-.25-.42-.44-.1-.19-.16-.42-.16-.66V1.61c0-.24.06-.47.16-.66.1-.19.25-.34.42-.44l10.15 11.49L3.18 23.49zm1.4.88l11.54-6.55-2.5-2.83-9.04 9.38zm14.33-8.14l-2.6-1.48L13.6 12l2.71-2.75 2.6-1.47c.83.47 1.32 1.21 1.32 2.22s-.49 1.76-1.32 2.23zm-2.6-7.74L4.58-.06l9.04 9.38 2.69-2.83z"/></svg>
+          <div class="store-btn-text"><small>Get it on</small>Google Play</div>
+        </a>
       </div>
-      <h1>Maritribe</h1>
-      <p class="tagline">Where maritime professionals connect.</p>
-      <p class="sub">As easy as WhatsApp, as powerful as LinkedIn.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="content">
-    <span class="pill">Built for Seafarers</span>
+  <!-- Wave divider: hero → problem -->
+  <svg class="wave-divider" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:var(--bottle-green);">
+    <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="#fff"/>
+  </svg>
 
-    <div class="features">
-      <div class="feature">
-        <div class="feature-dot green">&#9875;</div>
-        <div>
-          <h3>Communities by Batch & Department</h3>
-          <p>Join conversations organized by your graduating class, department, or maritime interest — not lost in endless group chats.</p>
+  <!-- Problem Section -->
+  <section class="problem-section" aria-label="The problem we solve">
+    <div class="section-inner">
+      <div class="anim-fade-up">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Alumni engagement isn't lacking &mdash;<br>it's invisible.</h2>
+        <p class="section-subtitle">Active networking happens in WhatsApp groups but is siloed by batch and department. Valuable knowledge is shared, then lost forever in endless scroll.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card problem-card--before anim-fade-up">
+          <div class="problem-card-label">WhatsApp Today</div>
+          <ul class="problem-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#DC2626" stroke-width="1.5"/><line x1="6" y1="6" x2="12" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="6" x2="6" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Scattered across dozens of groups
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#DC2626" stroke-width="1.5"/><line x1="6" y1="6" x2="12" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="6" x2="6" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg>
+              No search, no archive
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#DC2626" stroke-width="1.5"/><line x1="6" y1="6" x2="12" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="6" x2="6" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Phone numbers exposed to all
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#DC2626" stroke-width="1.5"/><line x1="6" y1="6" x2="12" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="6" x2="6" y2="12" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Cross-batch connections impossible
+            </li>
+          </ul>
+        </div>
+        <div class="problem-card problem-card--after anim-fade-up">
+          <div class="problem-card-label">Maritribe</div>
+          <ul class="problem-list">
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#059669" stroke-width="1.5"/><polyline points="5.5,9.5 8,12 12.5,6.5" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Organized communities by topic
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#059669" stroke-width="1.5"/><polyline points="5.5,9.5 8,12 12.5,6.5" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Every discussion searchable forever
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#059669" stroke-width="1.5"/><polyline points="5.5,9.5 8,12 12.5,6.5" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Privacy-first, no phone exposure
+            </li>
+            <li>
+              <svg viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="#059669" stroke-width="1.5"/><polyline points="5.5,9.5 8,12 12.5,6.5" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Connect across all batches
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="feature">
-        <div class="feature-dot jam">&#128274;</div>
-        <div>
+    </div>
+  </section>
+
+  <!-- Wave divider: problem → features -->
+  <svg class="wave-divider wave-divider-bottom" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:#fff;">
+    <path d="M0,80 C480,0 960,0 1440,80 L1440,80 L0,80 Z" fill="var(--ivory)"/>
+  </svg>
+
+  <!-- Features Section -->
+  <section class="features-section" aria-label="Key features">
+    <div class="section-inner">
+      <div style="text-align:center;" class="anim-fade-up">
+        <div class="section-label" style="text-align:center;">Why Maritribe</div>
+        <h2 class="section-title" style="text-align:center;margin-left:auto;margin-right:auto;">Built different, for those who sail different.</h2>
+      </div>
+      <div class="features-grid">
+        <!-- Compass -->
+        <div class="feature-card anim-fade-up">
+          <div class="feature-icon feature-icon--green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88" fill="currentColor" opacity="0.2" stroke="none"/>
+              <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+            </svg>
+          </div>
+          <h3>Communities by Batch &amp; Department</h3>
+          <p>Join conversations organized by your graduating class, department, or maritime interest &mdash; not lost in endless group chats.</p>
+        </div>
+        <!-- Shield -->
+        <div class="feature-card anim-fade-up">
+          <div class="feature-icon feature-icon--jam">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4" stroke-width="2"/>
+            </svg>
+          </div>
           <h3>Privacy-First Design</h3>
           <p>No phone number exposure. Verified members only. Your professional reputation stays under your control.</p>
         </div>
-      </div>
-      <div class="feature">
-        <div class="feature-dot blue">&#128269;</div>
-        <div>
+        <!-- Telescope -->
+        <div class="feature-card anim-fade-up">
+          <div class="feature-icon feature-icon--gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <circle cx="11" cy="11" r="3" opacity="0.3" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
           <h3>Searchable Knowledge</h3>
-          <p>Every discussion is searchable and permanent. No more scrolling through 500 unread WhatsApp messages to find that one answer.</p>
+          <p>Every discussion is searchable and permanent. No more scrolling through 500 unread messages to find that one answer.</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="compare">
-      <div class="compare-title">The WhatsApp Problem</div>
-      <div class="compare-row">
-        <span class="compare-chip strike">Scattered groups</span>
-        <span class="compare-chip strike">No search</span>
-        <span class="compare-chip strike">Phone exposed</span>
-        <span class="compare-chip active">Maritribe</span>
+  <!-- Wave divider: features → stats -->
+  <svg class="wave-divider" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:var(--ivory);">
+    <path d="M0,0 C360,80 1080,80 1440,0 L1440,80 L0,80 Z" fill="var(--deep-teal)"/>
+  </svg>
+
+  <!-- Stats Section -->
+  <section class="stats-section" aria-label="Platform statistics">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat-item anim-fade-up">
+          <div class="stat-number" data-target="3000" data-suffix="+">0</div>
+          <div class="stat-label">Alumni Connected</div>
+          <div class="stat-divider" aria-hidden="true"></div>
+        </div>
+        <div class="stat-item anim-fade-up">
+          <div class="stat-number" data-target="50" data-suffix="+">0</div>
+          <div class="stat-label">Communities</div>
+          <div class="stat-divider" aria-hidden="true"></div>
+        </div>
+        <div class="stat-item anim-fade-up">
+          <div class="stat-number" data-target="100" data-suffix="%">0</div>
+          <div class="stat-label">Private</div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="cta-box">
-      <h2>Join your alumni network</h2>
-      <p>Your batch is already here. Connect with maritime professionals who share your journey.</p>
-      <a class="cta-btn" href="#">Coming Soon on Play Store</a>
+  <!-- Wave divider: stats → CTA -->
+  <svg class="wave-divider" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true" style="background:var(--deep-teal);">
+    <path d="M0,0 C480,80 960,80 1440,0 L1440,80 L0,80 Z" fill="var(--jam)"/>
+  </svg>
+
+  <!-- CTA Section -->
+  <section class="cta-section" aria-label="Call to action">
+    <!-- Decorative compass -->
+    <svg class="cta-compass-deco" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g stroke="#fff" stroke-width="1">
+        <circle cx="200" cy="200" r="190"/>
+        <circle cx="200" cy="200" r="140"/>
+        <circle cx="200" cy="200" r="50"/>
+        <polygon points="200,10 208,180 200,165 192,180" fill="#fff" opacity="0.4"/>
+        <polygon points="200,390 208,220 200,235 192,220" fill="#fff" opacity="0.3"/>
+        <polygon points="10,200 180,192 165,200 180,208" fill="#fff" opacity="0.3"/>
+        <polygon points="390,200 220,192 235,200 220,208" fill="#fff" opacity="0.3"/>
+      </g>
+    </svg>
+    <div class="section-inner">
+      <div class="anim-fade-up">
+        <h2>Join your alumni network</h2>
+        <p>Your batch is already here. Connect with maritime professionals who share your journey.</p>
+        <a href="#" class="cta-main-btn">Download Maritribe</a>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="footer">Built with care for maritime alumni</div>
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <svg class="footer-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>
+      </svg>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="footer-divider" aria-hidden="true"></div>
+      <p>&copy; 2026 Maritribe. Charting new waters for maritime professionals.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll detection
+    (function() {
+      var nav = document.querySelector('.nav');
+      var scrollThreshold = 60;
+      function onScroll() {
+        if (window.scrollY > scrollThreshold) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // IntersectionObserver for fade-in animations
+    (function() {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var elements = document.querySelectorAll('.anim-fade-up');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry, i) {
+          if (entry.isIntersecting) {
+            // Stagger siblings
+            var siblings = entry.target.parentElement.querySelectorAll('.anim-fade-up');
+            var index = Array.prototype.indexOf.call(siblings, entry.target);
+            entry.target.style.transitionDelay = (index * 0.1) + 's';
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      elements.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // Counter animation for stats
+    (function() {
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var statNumbers = document.querySelectorAll('.stat-number[data-target]');
+      var animated = new Set();
+
+      function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (prefersReduced) {
+          el.textContent = target.toLocaleString() + suffix;
+          return;
+        }
+        var duration = 1500;
+        var start = performance.now();
+        function update(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(eased * target);
+          el.textContent = current.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !animated.has(entry.target)) {
+            animated.add(entry.target);
+            animateCounter(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      statNumbers.forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
 </body>
 </html>

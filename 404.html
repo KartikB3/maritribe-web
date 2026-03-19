@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maritribe</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bottle-green: #0F4A3C;
@@ -15,6 +16,8 @@
       --mint: #10B981;
       --ivory: #F5F2E6;
       --ivory-dark: #E7E3D6;
+      --gold: #C9A84C;
+      --deep-teal: #0A2E24;
       --text-primary: #111827;
       --text-secondary: #6B7280;
       --text-tertiary: #9CA3AF;
@@ -25,11 +28,76 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       background: var(--ivory);
       min-height: 100vh;
       color: var(--text-primary);
+      position: relative;
     }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    /* ── Animations ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    @keyframes spin-compass {
+      0% { transform: rotate(-20deg); }
+      25% { transform: rotate(10deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes lighthouse-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .animate-in { animation: fadeInUp 0.5s ease-out both; }
+    .animate-in-delay { animation: fadeInUp 0.5s ease-out 0.15s both; }
+    .animate-in-delay-2 { animation: fadeInUp 0.5s ease-out 0.3s both; }
 
     /* ── Top Bar ── */
     .topbar {
@@ -38,21 +106,30 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      position: relative;
+    }
+    .topbar::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold) 40%, transparent);
     }
     .topbar-logo {
       width: 34px; height: 34px;
       background: var(--ivory);
-      border: 2px solid var(--jam);
+      border: 2px solid var(--gold);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       text-decoration: none;
     }
     .topbar-logo span {
-      font-size: 13px; font-weight: 900; color: var(--bottle-green);
-      letter-spacing: -0.5px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px; font-weight: 400; color: var(--bottle-green);
     }
     .topbar-title {
-      font-size: 17px; font-weight: 800; color: #fff;
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: #fff;
       text-decoration: none;
     }
 
@@ -60,53 +137,82 @@
     .container {
       max-width: 560px;
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: 24px 16px 40px;
     }
 
-    /* ── Loading ── */
-    .loader {
+    /* ── Skeleton Loading ── */
+    .skeleton {
+      animation: fadeInUp 0.3s ease-out both;
+    }
+    .skeleton-card {
+      background: var(--surface);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .skeleton-bone {
+      background: linear-gradient(90deg, var(--ivory-dark) 25%, var(--ivory) 50%, var(--ivory-dark) 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.5s ease-in-out infinite, pulse 2s ease-in-out infinite;
+      border-radius: 6px;
+    }
+    .skeleton-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 80px 20px;
-      gap: 14px;
+      gap: 12px;
+      padding: 18px 20px;
     }
-    .spinner {
-      width: 32px; height: 32px;
-      border: 3px solid var(--ivory-dark);
-      border-top-color: var(--mint);
+    .skeleton-avatar {
+      width: 44px; height: 44px;
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loader-text {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      font-weight: 500;
+    .skeleton-lines { flex: 1; }
+    .skeleton-line {
+      height: 12px;
+      margin-bottom: 8px;
     }
+    .skeleton-line:last-child { margin-bottom: 0; width: 60%; }
+    .skeleton-media {
+      width: 100%;
+      height: 200px;
+    }
+    .skeleton-body { padding: 18px 20px; }
+    .skeleton-title { height: 18px; width: 80%; margin-bottom: 14px; }
+    .skeleton-text { height: 11px; margin-bottom: 10px; }
+    .skeleton-text:nth-child(3) { width: 90%; }
+    .skeleton-text:nth-child(4) { width: 70%; }
+    .skeleton-stats {
+      display: flex;
+      gap: 20px;
+      padding: 14px 20px;
+      border-top: 1px solid var(--ivory-dark);
+    }
+    .skeleton-stat { height: 14px; width: 80px; }
 
     /* ── Post Card ── */
     .post-card {
       background: var(--surface);
       border-radius: 18px;
-      border: 1px solid var(--ivory-dark);
       overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02);
+      animation: fadeInUp 0.5s ease-out both;
     }
     .post-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 16px 18px 0;
+      padding: 18px 20px 0;
     }
     .post-avatar {
-      width: 42px; height: 42px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: var(--bottle-green);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-weight: 800; font-size: 17px;
       flex-shrink: 0;
       overflow: hidden;
+      box-shadow: 0 0 0 2px var(--gold);
     }
     .post-avatar img {
       width: 100%; height: 100%;
@@ -121,17 +227,22 @@
     .post-meta-time {
       font-size: 12px; color: var(--text-tertiary); font-weight: 400;
     }
-    .post-body { padding: 14px 18px 16px; }
+    .post-meta-reading {
+      font-size: 11px; color: var(--text-tertiary); font-weight: 500;
+      margin-left: 4px;
+    }
+    .post-body { padding: 14px 20px 16px; }
     .post-title {
-      font-size: 17px;
-      font-weight: 800;
-      line-height: 1.4;
-      margin-bottom: 8px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.35;
+      margin-bottom: 10px;
       color: var(--text-primary);
     }
     .post-content {
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--text-secondary);
       white-space: pre-wrap;
       word-break: break-word;
@@ -141,11 +252,17 @@
       max-height: 400px;
       object-fit: cover;
       display: block;
+      border-radius: 0;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .post-media:hover {
+      transform: scale(1.02);
     }
     .post-stats {
       display: flex;
-      gap: 20px;
-      padding: 14px 18px;
+      gap: 24px;
+      padding: 14px 20px;
       border-top: 1px solid var(--ivory-dark);
       font-size: 13px;
       font-weight: 600;
@@ -156,8 +273,13 @@
       align-items: center;
       gap: 6px;
     }
-    .post-stats .stat-icon {
-      font-size: 16px;
+    .post-stats .stat svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     /* ── CTA Banner ── */
@@ -165,31 +287,39 @@
       margin-top: 20px;
       background: linear-gradient(135deg, var(--jam-light), var(--jam));
       border-radius: 18px;
-      padding: 28px 24px;
+      padding: 32px 24px;
       text-align: center;
       color: #fff;
       position: relative;
       overflow: hidden;
+      animation: fadeInUp 0.5s ease-out 0.2s both;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 180px; height: 180px;
+      border: 2px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
     }
     .cta-banner::after {
       content: '';
       position: absolute;
-      top: -40px; right: -40px;
-      width: 140px; height: 140px;
-      border: 2px solid rgba(255,255,255,0.06);
+      bottom: -40px; left: -20px;
+      width: 120px; height: 120px;
+      border: 2px solid rgba(255,255,255,0.04);
       border-radius: 50%;
     }
     .cta-banner h2 {
-      font-size: 19px;
-      font-weight: 800;
+      font-size: 21px;
       margin-bottom: 6px;
       position: relative;
     }
     .cta-banner p {
       font-size: 13px;
-      opacity: 0.75;
-      margin-bottom: 18px;
-      line-height: 1.5;
+      opacity: 0.8;
+      margin-bottom: 20px;
+      line-height: 1.6;
       position: relative;
     }
     .cta-btn {
@@ -197,33 +327,85 @@
       background: var(--mint);
       color: #fff;
       text-decoration: none;
-      padding: 12px 28px;
+      padding: 13px 30px;
       border-radius: 12px;
       font-size: 14px;
       font-weight: 700;
       position: relative;
       transition: transform 0.15s, box-shadow 0.15s;
       box-shadow: 0 4px 14px rgba(16,185,129,0.3);
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .cta-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(16,185,129,0.4);
     }
+    .cta-btn-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .cta-btn-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 16px;
+      border: 2px solid var(--mint);
+      animation: pulse-ring 2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    /* App Store style buttons */
+    .store-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--text-primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: transform 0.15s, opacity 0.15s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .store-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+    .store-btn svg { width: 20px; height: 20px; fill: #fff; }
+    .store-btn .store-label { font-size: 10px; font-weight: 400; opacity: 0.7; display: block; line-height: 1; }
+    .store-btn .store-name { font-size: 14px; font-weight: 700; display: block; line-height: 1.2; }
 
     /* ── Community Card ── */
     .community-card {
       background: var(--surface);
       border-radius: 18px;
-      border: 1px solid var(--ivory-dark);
       overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02);
+      animation: fadeInUp 0.5s ease-out both;
     }
     .community-header {
       background: var(--bottle-green);
-      padding: 40px 24px 48px;
+      padding: 44px 24px 52px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
+    /* Gradient mesh background */
     .community-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(139,34,82,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(10,46,36,0.3) 0%, transparent 50%);
+    }
+    .community-header::after {
       content: '';
       position: absolute;
       bottom: -2px;
@@ -232,55 +414,112 @@
       background: var(--surface);
       border-radius: 24px 24px 0 0;
     }
+    /* Decorative wave SVG at bottom of community header */
+    .community-wave {
+      position: absolute;
+      bottom: 20px; left: 0; right: 0;
+      height: 20px;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .community-wave svg {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 20px;
+      animation: wave 8s linear infinite;
+    }
     .community-icon {
-      width: 64px; height: 64px;
+      width: 68px; height: 68px;
       border-radius: 50%;
       background: var(--ivory);
-      border: 3px solid var(--jam);
+      border: 3px solid var(--gold);
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 14px;
-      font-size: 26px; color: var(--bottle-green); font-weight: 900;
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px; color: var(--bottle-green);
+      position: relative;
+      z-index: 2;
     }
     .community-header h2 {
-      font-size: 22px; font-weight: 800; color: #fff;
+      font-size: 24px; color: #fff;
+      position: relative;
+      z-index: 2;
     }
     .community-body {
-      padding: 20px 24px 28px;
+      padding: 24px 24px 32px;
       text-align: center;
     }
     .community-body .invite-tag {
       display: inline-block;
-      background: rgba(85,24,65,0.08);
-      color: var(--jam);
-      font-size: 12px;
+      background: rgba(201,168,76,0.12);
+      color: var(--gold);
+      font-size: 11px;
       font-weight: 700;
       padding: 5px 14px;
       border-radius: 20px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
     }
     .community-body .desc {
       font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 22px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    /* Member avatar stack */
+    .member-stack {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 0;
+    }
+    .member-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff;
+      margin-left: -8px;
+    }
+    .member-dot:first-child { margin-left: 0; }
+    .member-dot:nth-child(1) { background: var(--bottle-green); }
+    .member-dot:nth-child(2) { background: var(--jam); }
+    .member-dot:nth-child(3) { background: var(--gold); color: var(--deep-teal); }
+    .member-dot:nth-child(4) { background: var(--mint); }
+    .member-count {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 600;
+      margin-left: 8px;
     }
 
     /* ── Invite Page ── */
     .invite-card {
       background: var(--surface);
       border-radius: 18px;
-      border: 1px solid var(--ivory-dark);
-      text-align: center;
       overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03), 0 8px 24px rgba(0,0,0,0.02);
+      animation: fadeInUp 0.5s ease-out both;
     }
     .invite-hero {
       background: var(--bottle-green);
-      padding: 44px 24px 56px;
+      padding: 48px 24px 60px;
       position: relative;
+      text-align: center;
+      overflow: hidden;
     }
     .invite-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(201,168,76,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(139,34,82,0.15) 0%, transparent 50%);
+    }
+    .invite-hero::after {
       content: '';
       position: absolute;
       bottom: -2px;
@@ -289,53 +528,212 @@
       background: var(--surface);
       border-radius: 24px 24px 0 0;
     }
-    .invite-hero::after {
-      content: '';
-      position: absolute;
-      top: -40px; left: -40px;
-      width: 180px; height: 180px;
-      border: 2px solid rgba(255,255,255,0.05);
-      border-radius: 50%;
-    }
-    .invite-hero .logo-circle {
-      width: 72px; height: 72px;
-      background: var(--ivory);
-      border: 3px solid var(--jam);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
-    }
-    .invite-hero .logo-circle span {
-      font-size: 26px; font-weight: 900; color: var(--bottle-green); letter-spacing: -1px;
+    /* Compass SVG in invite hero */
+    .invite-compass {
+      width: 80px; height: 80px;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 2;
+      animation: float 4s ease-in-out infinite;
     }
     .invite-hero h2 {
-      font-size: 24px; font-weight: 800; color: #fff;
+      font-size: 28px; color: #fff;
       position: relative;
+      z-index: 2;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
     }
     .invite-body {
-      padding: 20px 24px 28px;
+      padding: 24px 24px 32px;
+      text-align: center;
     }
     .invite-body p {
       font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 22px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    /* Steps */
+    .invite-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .invite-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .invite-step-num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--bottle-green);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+    }
+    .invite-step-arrow {
+      color: var(--text-tertiary);
+      font-size: 14px;
     }
 
-    /* ── Error State ── */
+    /* ── Error Card ── */
     .error-card {
       background: var(--surface);
       border-radius: 18px;
-      border: 1px solid var(--ivory-dark);
-      padding: 52px 28px;
+      padding: 48px 28px;
       text-align: center;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      animation: fadeInUp 0.5s ease-out both;
     }
-    .error-icon { font-size: 48px; margin-bottom: 16px; }
     .error-card h2 {
-      font-size: 19px; font-weight: 800; margin-bottom: 8px;
+      font-size: 22px; margin-bottom: 8px;
     }
     .error-card p {
-      font-size: 14px; color: var(--text-secondary); line-height: 1.6;
+      font-size: 14px; color: var(--text-secondary); line-height: 1.7;
+    }
+    .error-illustration {
+      margin-bottom: 20px;
+    }
+    .error-illustration svg {
+      width: 80px; height: 80px;
+    }
+
+    /* ── 404 Page ── */
+    .four04-card {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 48px 28px 0;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      animation: fadeInUp 0.5s ease-out both;
+      position: relative;
+    }
+    .four04-lighthouse {
+      margin-bottom: 12px;
+      animation: float 5s ease-in-out infinite;
+    }
+    .four04-compass {
+      margin-bottom: 20px;
+    }
+    .four04-compass .needle {
+      transform-origin: center;
+      animation: spin-compass 2s ease-out 0.5s both;
+    }
+    .four04-card h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .four04-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .four04-home-btn {
+      display: inline-block;
+      background: var(--bottle-green);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(15,74,60,0.25);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin-bottom: 32px;
+    }
+    .four04-home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15,74,60,0.35);
+    }
+    /* CSS animated waves at bottom of 404 */
+    .four04-waves {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .four04-waves svg {
+      position: absolute;
+      bottom: 0;
+      width: 200%;
+      height: 60px;
+    }
+    .four04-waves .wave1 { animation: wave 7s linear infinite; opacity: 0.15; }
+    .four04-waves .wave2 { animation: wave 11s linear infinite reverse; opacity: 0.1; bottom: 4px; }
+    .four04-waves .wave3 { animation: wave 5s linear infinite; opacity: 0.08; bottom: 8px; }
+    .lighthouse-glow {
+      animation: lighthouse-glow 3s ease-in-out infinite;
+    }
+
+    /* ── Sticky App Bar (mobile) ── */
+    .sticky-app-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--ivory-dark);
+      padding: 10px 16px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+      animation: fadeInUp 0.3s ease-out both;
+    }
+    .sticky-app-bar.hidden { display: none !important; }
+    .sticky-app-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sticky-app-bar-icon {
+      width: 36px; height: 36px;
+      background: var(--bottle-green);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-family: 'DM Serif Display', serif;
+      font-size: 14px;
+    }
+    .sticky-app-bar-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .sticky-app-bar-btn {
+      background: var(--mint);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sticky-app-bar-close {
+      background: none;
+      border: none;
+      color: var(--text-tertiary);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+    @media (max-width: 767px) {
+      .sticky-app-bar { display: flex; }
+      .container { padding-bottom: 80px; }
     }
 
     /* ── Footer ── */
@@ -344,6 +742,9 @@
       padding: 20px;
       font-size: 11px;
       color: var(--text-tertiary);
+    }
+    @media (max-width: 767px) {
+      .site-footer { padding-bottom: 70px; }
     }
   </style>
 </head>
@@ -355,9 +756,40 @@
   </div>
 
   <div class="container" id="app">
-    <div class="loader" id="loader">
-      <div class="spinner"></div>
-      <span class="loader-text">Loading...</span>
+    <!-- Skeleton loading (replaces old spinner) -->
+    <div id="loader" class="skeleton">
+      <div class="skeleton-card">
+        <div class="skeleton-header">
+          <div class="skeleton-bone skeleton-avatar"></div>
+          <div class="skeleton-lines">
+            <div class="skeleton-bone skeleton-line" style="width:50%"></div>
+            <div class="skeleton-bone skeleton-line" style="width:35%"></div>
+          </div>
+        </div>
+        <div class="skeleton-bone skeleton-media"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-bone skeleton-title"></div>
+          <div class="skeleton-bone skeleton-text" style="width:100%"></div>
+          <div class="skeleton-bone skeleton-text" style="width:90%"></div>
+          <div class="skeleton-bone skeleton-text" style="width:70%"></div>
+        </div>
+        <div class="skeleton-stats">
+          <div class="skeleton-bone skeleton-stat"></div>
+          <div class="skeleton-bone skeleton-stat"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky mobile app bar (hidden by default, shown by JS for post/community pages) -->
+  <div class="sticky-app-bar" id="stickyBar">
+    <div class="sticky-app-bar-left">
+      <div class="sticky-app-bar-icon">MT</div>
+      <span class="sticky-app-bar-text">Open in Maritribe</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <a class="sticky-app-bar-btn" href="/">Open</a>
+      <button class="sticky-app-bar-close" id="stickyClose" aria-label="Close app bar">&times;</button>
     </div>
   </div>
 
@@ -369,6 +801,16 @@
     const loader = document.getElementById('loader');
 
     function hide(el) { el.style.display = 'none'; }
+
+    // Sticky bar close
+    document.getElementById('stickyClose').addEventListener('click', function() {
+      document.getElementById('stickyBar').classList.add('hidden');
+    });
+
+    function showStickyBar() {
+      // Only relevant on mobile, CSS handles visibility
+      document.getElementById('stickyBar').classList.remove('hidden');
+    }
 
     function timeAgo(iso) {
       if (!iso) return '';
@@ -388,22 +830,109 @@
       return d.innerHTML;
     }
 
+    function readingTime(text) {
+      if (!text) return '';
+      const words = text.trim().split(/\s+/).length;
+      const mins = Math.max(1, Math.round(words / 200));
+      return mins + ' min read';
+    }
+
+    // SVG icons
+    const icons = {
+      clap: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="1" fill="currentColor" stroke="none"/></svg>',
+      comment: '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>',
+      lock: '<svg viewBox="0 0 80 80" width="80" height="80"><circle cx="40" cy="40" r="35" fill="none" stroke="' + 'var(--bottle-green)' + '" stroke-width="3" opacity="0.2"/><circle cx="40" cy="40" r="28" fill="none" stroke="' + 'var(--bottle-green)' + '" stroke-width="2" opacity="0.1"/><rect x="28" y="36" width="24" height="18" rx="3" fill="var(--bottle-green)" opacity="0.8"/><path d="M33 36V30a7 7 0 0114 0v6" fill="none" stroke="var(--bottle-green)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/><circle cx="40" cy="45" r="2.5" fill="var(--ivory)"/><line x1="40" y1="47" x2="40" y2="50" stroke="var(--ivory)" stroke-width="2" stroke-linecap="round"/></svg>',
+      bottle: '<svg viewBox="0 0 80 80" width="80" height="80"><ellipse cx="40" cy="60" rx="18" ry="6" fill="var(--bottle-green)" opacity="0.08"/><rect x="34" y="12" width="12" height="8" rx="2" fill="var(--gold)" opacity="0.7"/><path d="M33 20h14l3 12v24c0 4-4 8-10 8s-10-4-10-8V32z" fill="none" stroke="var(--bottle-green)" stroke-width="2" opacity="0.6"/><line x1="33" y1="32" x2="47" y2="32" stroke="var(--bottle-green)" stroke-width="1.5" opacity="0.3"/><rect x="36" y="38" width="8" height="10" rx="1" fill="var(--gold)" opacity="0.3"/></svg>',
+      fog: '<svg viewBox="0 0 80 80" width="80" height="80"><line x1="10" y1="30" x2="70" y2="30" stroke="var(--text-tertiary)" stroke-width="3" stroke-linecap="round" opacity="0.3"/><line x1="15" y1="40" x2="65" y2="40" stroke="var(--text-tertiary)" stroke-width="3" stroke-linecap="round" opacity="0.2"/><line x1="20" y1="50" x2="60" y2="50" stroke="var(--text-tertiary)" stroke-width="3" stroke-linecap="round" opacity="0.15"/><circle cx="40" cy="40" r="12" fill="none" stroke="var(--text-tertiary)" stroke-width="2" opacity="0.15"/></svg>'
+    };
+
     function renderCTA(title, desc) {
       return `
         <div class="cta-banner">
           <h2>${title || 'Join the conversation'}</h2>
           <p>${desc || 'Download Maritribe to interact, join communities, and connect with maritime professionals.'}</p>
-          <a class="cta-btn" href="/">Get Maritribe</a>
+          <div class="cta-btn-wrapper"><a class="cta-btn" href="/">Get Maritribe</a></div>
         </div>`;
     }
 
     function renderError(title, msg) {
       hide(loader);
+      // Choose illustration based on content
+      var illustration = icons.fog;
+      if (title === 'Private Community') {
+        illustration = icons.lock;
+      } else if (title === 'Post Not Found') {
+        illustration = icons.bottle;
+      }
       app.innerHTML = `
         <div class="error-card">
-          <div class="error-icon">&#9875;</div>
+          <div class="error-illustration">${illustration}</div>
           <h2>${esc(title)}</h2>
           <p>${esc(msg)}</p>
+        </div>
+        ${renderCTA()}`;
+    }
+
+    // ── 404 Page ──
+    function render404() {
+      hide(loader);
+      document.title = 'Page Not Found — Maritribe';
+      app.innerHTML = `
+        <div class="four04-card">
+          <div class="four04-lighthouse">
+            <svg width="80" height="100" viewBox="0 0 80 100">
+              <!-- Lighthouse base -->
+              <rect x="28" y="40" width="24" height="50" rx="2" fill="var(--bottle-green)" opacity="0.8"/>
+              <!-- Lighthouse stripes -->
+              <rect x="28" y="52" width="24" height="8" fill="var(--jam-light)" opacity="0.6"/>
+              <rect x="28" y="68" width="24" height="8" fill="var(--jam-light)" opacity="0.6"/>
+              <!-- Lighthouse top -->
+              <rect x="24" y="34" width="32" height="8" rx="2" fill="var(--bottle-green)"/>
+              <!-- Lamp room -->
+              <rect x="30" y="24" width="20" height="12" rx="2" fill="var(--gold)" opacity="0.8"/>
+              <!-- Light beams -->
+              <line x1="22" y1="30" x2="8" y2="22" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" class="lighthouse-glow"/>
+              <line x1="58" y1="30" x2="72" y2="22" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" class="lighthouse-glow"/>
+              <!-- Roof -->
+              <polygon points="34,16 46,16 40,8" fill="var(--bottle-green)"/>
+              <!-- Door -->
+              <rect x="36" y="76" width="8" height="14" rx="4" fill="var(--deep-teal)"/>
+              <!-- Windows -->
+              <circle cx="40" cy="48" r="3" fill="var(--gold)" opacity="0.5"/>
+              <circle cx="40" cy="63" r="3" fill="var(--gold)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="four04-compass">
+            <svg width="48" height="48" viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="22" fill="none" stroke="var(--bottle-green)" stroke-width="1.5" opacity="0.2"/>
+              <circle cx="24" cy="24" r="18" fill="none" stroke="var(--bottle-green)" stroke-width="1" opacity="0.1"/>
+              <!-- Cardinal points -->
+              <text x="24" y="10" text-anchor="middle" font-size="7" fill="var(--text-tertiary)" font-weight="600" font-family="Plus Jakarta Sans">N</text>
+              <text x="24" y="43" text-anchor="middle" font-size="7" fill="var(--text-tertiary)" font-weight="600" font-family="Plus Jakarta Sans">S</text>
+              <text x="6" y="27" text-anchor="middle" font-size="7" fill="var(--text-tertiary)" font-weight="600" font-family="Plus Jakarta Sans">W</text>
+              <text x="42" y="27" text-anchor="middle" font-size="7" fill="var(--text-tertiary)" font-weight="600" font-family="Plus Jakarta Sans">E</text>
+              <!-- Needle -->
+              <g class="needle">
+                <polygon points="24,10 22,24 26,24" fill="var(--jam-light)"/>
+                <polygon points="24,38 22,24 26,24" fill="var(--text-tertiary)" opacity="0.4"/>
+              </g>
+              <circle cx="24" cy="24" r="2.5" fill="var(--bottle-green)"/>
+            </svg>
+          </div>
+          <h2>Looks like you've drifted off course</h2>
+          <p>The page you're looking for has sailed away. Let's get you back to safe harbor.</p>
+          <a class="four04-home-btn" href="/">Back to Shore</a>
+          <div class="four04-waves">
+            <svg class="wave1" viewBox="0 0 1200 60" preserveAspectRatio="none">
+              <path d="M0,30 C150,10 350,50 600,30 C850,10 1050,50 1200,30 L1200,60 L0,60 Z" fill="var(--bottle-green)"/>
+            </svg>
+            <svg class="wave2" viewBox="0 0 1200 60" preserveAspectRatio="none">
+              <path d="M0,35 C200,15 400,55 600,35 C800,15 1000,55 1200,35 L1200,60 L0,60 Z" fill="var(--bottle-green)"/>
+            </svg>
+            <svg class="wave3" viewBox="0 0 1200 60" preserveAspectRatio="none">
+              <path d="M0,40 C100,20 300,55 600,35 C900,15 1100,50 1200,40 L1200,60 L0,60 Z" fill="var(--bottle-green)"/>
+            </svg>
+          </div>
         </div>
         ${renderCTA()}`;
     }
@@ -431,9 +960,12 @@
           ? '<img class="post-media" src="' + esc(post.mediaUrls[0]) + '" alt="">'
           : '';
 
+        const readTime = readingTime(post.body);
+
         document.title = (post.title || 'Post') + ' — Maritribe';
 
         hide(loader);
+        showStickyBar();
         app.innerHTML = `
           <div class="post-card">
             ${mediaHtml}
@@ -444,6 +976,7 @@
                 <div>
                   <span class="post-meta-community">${esc(post.community?.name || '')}</span>
                   <span class="post-meta-time">&middot; ${timeAgo(post.createdAt)}</span>
+                  ${readTime ? '<span class="post-meta-reading">&middot; ' + readTime + '</span>' : ''}
                 </div>
               </div>
             </div>
@@ -452,8 +985,14 @@
               <div class="post-content">${esc(post.body)}</div>
             </div>
             <div class="post-stats">
-              <div class="stat"><span class="stat-icon">&#128079;</span> ${post.score || 0} claps</div>
-              <div class="stat"><span class="stat-icon">&#128172;</span> ${post.commentsCount || 0} comments</div>
+              <div class="stat">
+                <svg viewBox="0 0 24 24"><path d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H3.75"/></svg>
+                ${post.score || 0} claps
+              </div>
+              <div class="stat">
+                <svg viewBox="0 0 24 24"><path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"/></svg>
+                ${post.commentsCount || 0} comments
+              </div>
             </div>
           </div>
           ${renderCTA('Continue in the app', 'Open Maritribe to clap, comment, and join the discussion.')}`;
@@ -468,16 +1007,38 @@
       document.title = 'Join ' + name + ' — Maritribe';
 
       hide(loader);
+      showStickyBar();
       app.innerHTML = `
         <div class="community-card">
           <div class="community-header">
+            <div class="community-wave">
+              <svg viewBox="0 0 1200 20" preserveAspectRatio="none">
+                <path d="M0,10 C150,0 350,20 600,10 C850,0 1050,20 1200,10 L1200,20 L0,20 Z" fill="rgba(255,255,255,0.06)"/>
+              </svg>
+            </div>
             <div class="community-icon">${name.charAt(0)}</div>
             <h2>${esc(name)}</h2>
           </div>
           <div class="community-body">
             <span class="invite-tag">Community Invite</span>
+            <div class="member-stack">
+              <div class="member-dot">D</div>
+              <div class="member-dot">E</div>
+              <div class="member-dot">N</div>
+              <div class="member-dot">+</div>
+              <span class="member-count">Members already here</span>
+            </div>
             <p class="desc">You've been invited to join <strong>${esc(name)}</strong> on Maritribe. Download the app to see posts, join discussions, and connect with members.</p>
-            <a class="cta-btn" href="/">Get Maritribe</a>
+            <div class="store-buttons">
+              <a class="store-btn" href="/">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <div><span class="store-label">Download on the</span><span class="store-name">App Store</span></div>
+              </a>
+              <a class="store-btn" href="/">
+                <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33c.576.333.576 1.17 0 1.504L17.698 13.67l-2.504-2.504 2.504-2.658zM5.864 2.658L16.8 9.325l-2.302 2.302L5.864 2.658z"/></svg>
+                <div><span class="store-label">Get it on</span><span class="store-name">Google Play</span></div>
+              </a>
+            </div>
           </div>
         </div>`;
     }
@@ -489,12 +1050,45 @@
       app.innerHTML = `
         <div class="invite-card">
           <div class="invite-hero">
-            <div class="logo-circle"><span>MT</span></div>
+            <div class="invite-compass">
+              <svg viewBox="0 0 80 80" width="80" height="80">
+                <circle cx="40" cy="40" r="36" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <!-- Cardinal ticks -->
+                <line x1="40" y1="6" x2="40" y2="12" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="40" y1="68" x2="40" y2="74" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="6" y1="40" x2="12" y2="40" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                <line x1="68" y1="40" x2="74" y2="40" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+                <!-- Compass rose -->
+                <polygon points="40,14 37,40 43,40" fill="var(--gold)" opacity="0.9"/>
+                <polygon points="40,66 37,40 43,40" fill="rgba(255,255,255,0.3)"/>
+                <polygon points="14,40 40,37 40,43" fill="rgba(255,255,255,0.3)"/>
+                <polygon points="66,40 40,37 40,43" fill="rgba(255,255,255,0.3)"/>
+                <circle cx="40" cy="40" r="4" fill="var(--gold)"/>
+                <circle cx="40" cy="40" r="2" fill="var(--deep-teal)"/>
+              </svg>
+            </div>
             <h2>You're invited!</h2>
           </div>
           <div class="invite-body">
             <p>A fellow maritime professional invited you to <strong>Maritribe</strong> — the community platform built for seafarers, alumni, and the maritime industry.</p>
-            <a class="cta-btn" href="/">Get Maritribe</a>
+            <div class="invite-steps">
+              <div class="invite-step"><span class="invite-step-num">1</span> Download</div>
+              <span class="invite-step-arrow">&rarr;</span>
+              <div class="invite-step"><span class="invite-step-num">2</span> Sign up</div>
+              <span class="invite-step-arrow">&rarr;</span>
+              <div class="invite-step"><span class="invite-step-num">3</span> Connect</div>
+            </div>
+            <div class="store-buttons">
+              <a class="store-btn" href="/">
+                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <div><span class="store-label">Download on the</span><span class="store-name">App Store</span></div>
+              </a>
+              <a class="store-btn" href="/">
+                <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33c.576.333.576 1.17 0 1.504L17.698 13.67l-2.504-2.504 2.504-2.658zM5.864 2.658L16.8 9.325l-2.302 2.302L5.864 2.658z"/></svg>
+                <div><span class="store-label">Get it on</span><span class="store-name">Google Play</span></div>
+              </a>
+            </div>
           </div>
         </div>`;
     }
@@ -511,7 +1105,7 @@
       } else if (segments[0] === 'invite') {
         renderAppInvite();
       } else {
-        renderError('Page Not Found', "The page you're looking for doesn't exist.");
+        render404();
       }
     })();
   </script>
