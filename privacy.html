@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Maritribe</title>
+  <meta name="description" content="MaritribeOne Alumni Network Privacy Policy">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bottle-green: #0F4A3C;
+      --jam: #551841;
+      --jam-mid: #6B1740;
+      --jam-light: #8B2252;
+      --mint: #10B981;
+      --mint-light: #34D399;
+      --ivory: #F5F2E6;
+      --ivory-dark: #E7E3D6;
+      --gold: #C9A84C;
+      --deep-teal: #0A2E24;
+      --text-primary: #111827;
+      --text-secondary: #6B7280;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--ivory);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--deep-teal);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--mint-light); }
+
+    .nav-back svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      color: white;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--deep-teal);
+      padding: 72px 24px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hero::before {
+      content: '🔒';
+      position: absolute;
+      font-size: 320px;
+      line-height: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.03;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-inner::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Layout ── */
+    .page-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    @media (max-width: 520px) {
+      .toc-grid { grid-template-columns: 1fr; }
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 0;
+      transition: color 0.15s;
+    }
+
+    .toc-item:hover { color: var(--bottle-green); }
+
+    .toc-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--jam);
+      min-width: 18px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 28px;
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--ivory-dark);
+    }
+
+    .section-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(85,24,65,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--jam);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--bottle-green);
+    }
+
+    .section-body {
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #374151;
+    }
+
+    .section-body p { margin-bottom: 12px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .section-body ul {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+
+    .section-body ul li {
+      display: flex;
+      gap: 10px;
+      padding: 4px 0;
+    }
+
+    .section-body ul li::before {
+      content: '•';
+      color: var(--jam);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .section-body ol {
+      margin: 8px 0 12px;
+      padding-left: 20px;
+    }
+
+    .section-body ol li { padding: 3px 0; }
+
+    .sub-section {
+      margin-bottom: 16px;
+    }
+
+    .sub-label {
+      font-weight: 700;
+      color: var(--bottle-green);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    /* ── Grievance card ── */
+    .grievance-card {
+      background: var(--ivory);
+      border: 1px solid var(--ivory-dark);
+      border-left: 3px solid var(--bottle-green);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 24px;
+      align-items: start;
+    }
+
+    .grievance-card .g-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bottle-green);
+      margin-bottom: 4px;
+    }
+
+    .grievance-card .g-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .grievance-card .g-email {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .grievance-card .g-email a {
+      color: var(--bottle-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .grievance-card .g-email a:hover { text-decoration: underline; }
+
+    .grievance-card .g-timing {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-self: center;
+    }
+
+    .grievance-card .g-timing span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 100px;
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 520px) {
+      .grievance-card { grid-template-columns: 1fr; }
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--ivory-dark);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--bottle-green);
+      margin-bottom: 6px;
+    }
+
+    .footer-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .footer-meta a {
+      color: var(--bottle-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Back to maritribe.one
+    </a>
+    <span class="nav-brand">Maritribe</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Privacy Policy</h1>
+      <p class="hero-sub">MaritribeOne Alumni Network &nbsp;·&nbsp; Last Updated: February 2025</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="page-wrapper">
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <div class="toc-grid">
+        <a href="#s1" class="toc-item"><span class="toc-num">1</span> Introduction</a>
+        <a href="#s2" class="toc-item"><span class="toc-num">2</span> Information We Collect</a>
+        <a href="#s3" class="toc-item"><span class="toc-num">3</span> How We Use Your Information</a>
+        <a href="#s4" class="toc-item"><span class="toc-num">4</span> Information Sharing</a>
+        <a href="#s5" class="toc-item"><span class="toc-num">5</span> Data Security</a>
+        <a href="#s6" class="toc-item"><span class="toc-num">6</span> Data Retention</a>
+        <a href="#s7" class="toc-item"><span class="toc-num">7</span> Your Rights</a>
+        <a href="#s8" class="toc-item"><span class="toc-num">8</span> Cookies</a>
+        <a href="#s9" class="toc-item"><span class="toc-num">9</span> Children's Privacy</a>
+        <a href="#s10" class="toc-item"><span class="toc-num">10</span> Changes to This Policy</a>
+        <a href="#s11" class="toc-item"><span class="toc-num">11</span> Grievance Officer</a>
+        <a href="#s12" class="toc-item"><span class="toc-num">12</span> Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section" id="s1" style="animation-delay:0.05s">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2 class="section-title">Introduction</h2>
+      </div>
+      <div class="section-body">
+        <p>We at MaritribeOne Alumni Network ("Platform", "we", "us", "our") recognize that your privacy is very important and take it seriously. This Privacy Policy describes how we collect, use, disclose, and transfer personal information of users through our website and mobile application.</p>
+        <p>This Privacy Policy is compliant with the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and the Digital Personal Data Protection Act, 2023 (DPDP Act).</p>
+        <p>By using this Platform, you agree to the terms of this Privacy Policy. If you do not agree, please do not use this Platform.</p>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section" id="s2" style="animation-delay:0.08s">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2 class="section-title">Information We Collect</h2>
+      </div>
+      <div class="section-body">
+        <div class="sub-section">
+          <div class="sub-label">2.1 Personal Information Provided by You</div>
+          <p>When you register on our Platform, we collect the following personal information:</p>
+          <ul>
+            <li>Name, Roll Number, and Batch Year</li>
+            <li>Email address and mobile/WhatsApp phone number</li>
+            <li>Profile information including current status (Sailing / Shore / Between Jobs)</li>
+            <li>Company/Ship name, Rank, and Location (optional)</li>
+            <li>Profile photograph (optional) and biography (optional)</li>
+            <li>Specialization (Deck / Engine / Navigation / Commercial / Naval Architect / Business)</li>
+          </ul>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">2.2 Information Collected Through Use of Service</div>
+          <p>We automatically collect certain information when you use our Platform:</p>
+          <ul>
+            <li><strong>Log Data:</strong> IP address, browser type, device information, access times, pages viewed</li>
+            <li><strong>Usage Data:</strong> Communities joined, posts created, interactions with other members</li>
+            <li><strong>Device Data:</strong> Operating system, device identifiers, mobile network information</li>
+          </ul>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">2.3 Content You Share</div>
+          <p>Any content you post on the Platform including posts, comments, messages, and media files becomes part of your information. Posts made in public communities are visible to all members. Direct messages are stored to facilitate delivery but are not monitored by us.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">2.4 Third-Party Sign-In</div>
+          <p>If you choose to sign in using Google OAuth, we collect your name, email address, and profile picture as made available through your Google account.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section" id="s3" style="animation-delay:0.11s">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2 class="section-title">How We Use Your Information</h2>
+      </div>
+      <div class="section-body">
+        <p>We use your personal information for the following purposes:</p>
+        <ul>
+          <li>To set up and maintain your account on the Platform</li>
+          <li>To verify your alumni status through administrator approval</li>
+          <li>To facilitate communication between alumni members</li>
+          <li>To send you notifications about activity relevant to you (mentions, replies, direct messages)</li>
+          <li>To send institutional announcements and broadcasts from the institute, where relevant</li>
+          <li>To improve the Platform through analytics and user feedback</li>
+          <li>To enforce our Terms of Service and Community Guidelines</li>
+          <li>To comply with legal obligations and respond to lawful requests</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section" id="s4" style="animation-delay:0.14s">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2 class="section-title">Information Sharing and Disclosure</h2>
+      </div>
+      <div class="section-body">
+        <div class="sub-section">
+          <div class="sub-label">4.1 Content Visible to Others</div>
+          <p>Public content you post in communities is accessible to all Platform members. Your profile information (name, batch, current status) is visible to other verified members. We do <strong>not</strong> share your phone number or email address with other members without your explicit consent.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">4.2 Sharing with Institution</div>
+          <p>Institute administrators (where signed up) have access to member profiles for verification purposes and may view aggregate analytics. They may also access flagged content for moderation purposes.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">4.3 Legal Requirements</div>
+          <p>We may disclose your information to comply with applicable laws, court orders, or legal process; to investigate, prevent, or take action regarding illegal activities, suspected fraud, or violations of our Terms; or to protect the rights, property, or safety of our users or the public.</p>
+        </div>
+        <div class="sub-section">
+          <div class="sub-label">4.4 No Sale of Personal Information</div>
+          <p>We do not sell, rent, or trade your personal information to third parties for commercial purposes.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section" id="s5" style="animation-delay:0.17s">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2 class="section-title">Data Security</h2>
+      </div>
+      <div class="section-body">
+        <p>We implement industry-standard security measures to protect your personal information including encryption of data in transit and at rest, secure authentication mechanisms, and access controls limiting data access to authorized personnel. However, no method of transmission over the Internet is completely secure, and we cannot guarantee absolute security.</p>
+        <p>We use trusted cloud hosting providers with servers located in India, ensuring compliance with data localization requirements under applicable law.</p>
+      </div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="section" id="s6" style="animation-delay:0.20s">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h2 class="section-title">Data Retention</h2>
+      </div>
+      <div class="section-body">
+        <p>We retain your personal information for as long as your account is active or as needed to provide you services. If you delete your account, we will delete or anonymize your personal information within 90 days, except where retention is required for legal obligations or legitimate business purposes. Some content may remain if it has been shared or quoted by other users.</p>
+      </div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="section" id="s7" style="animation-delay:0.23s">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <h2 class="section-title">Your Rights</h2>
+      </div>
+      <div class="section-body">
+        <p>Under the Digital Personal Data Protection Act, 2023 and applicable laws, you have the following rights:</p>
+        <ul>
+          <li><strong>Right to Access:</strong> Obtain confirmation of whether your personal data is being processed and access to such data</li>
+          <li><strong>Right to Correction:</strong> Request correction of inaccurate or incomplete personal data</li>
+          <li><strong>Right to Erasure:</strong> Request deletion of your personal data subject to legal requirements</li>
+          <li><strong>Right to Withdraw Consent:</strong> Withdraw consent for processing at any time</li>
+          <li><strong>Right to Grievance Redressal:</strong> Lodge complaints regarding data processing</li>
+        </ul>
+        <p>To exercise these rights, contact our Grievance Officer at the address provided below. We will respond to your request within 30 days.</p>
+      </div>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="section" id="s8" style="animation-delay:0.26s">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <h2 class="section-title">Cookies and Tracking Technologies</h2>
+      </div>
+      <div class="section-body">
+        <p>We use cookies and similar technologies to enhance your experience, remember your preferences, and analyze Platform usage. You can control cookie settings through your browser, but disabling cookies may limit certain Platform functionality.</p>
+      </div>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="section" id="s9" style="animation-delay:0.29s">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <h2 class="section-title">Children's Privacy</h2>
+      </div>
+      <div class="section-body">
+        <p>The Platform is intended for maritime professionals who are 18 years or older. We do not knowingly collect personal information from children under 18. If we become aware that we have collected such information, we will take steps to delete it.</p>
+      </div>
+    </div>
+
+    <!-- Section 10 -->
+    <div class="section" id="s10" style="animation-delay:0.32s">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <h2 class="section-title">Changes to This Policy</h2>
+      </div>
+      <div class="section-body">
+        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through in-app notifications or email. Your continued use of the Platform after changes constitute acceptance of the updated policy.</p>
+      </div>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="section" id="s11" style="animation-delay:0.35s">
+      <div class="section-header">
+        <div class="section-num">11</div>
+        <h2 class="section-title">Grievance Officer</h2>
+      </div>
+      <div class="section-body">
+        <p>In accordance with the Information Technology Act, 2000 and IT Rules 2021, we have appointed a Grievance Officer to address your concerns regarding data privacy and Platform usage:</p>
+        <div class="grievance-card">
+          <div>
+            <div class="g-label">Grievance Officer</div>
+            <div class="g-name">MariTribeOne</div>
+            <div class="g-email">
+              Maharashtra Academy of Naval Education and Training, Pune<br>
+              Email: <a href="mailto:connect@maritribe.one">connect@maritribe.one</a>
+            </div>
+          </div>
+          <div class="g-timing">
+            <span>⏱ Acknowledgement within 24 hours</span>
+            <span>✓ Resolution within 15 days</span>
+            <span>🕐 Mon – Fri, 10 AM – 5 PM IST</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 12 -->
+    <div class="section" id="s12" style="animation-delay:0.38s">
+      <div class="section-header">
+        <div class="section-num">12</div>
+        <h2 class="section-title">Contact Us</h2>
+      </div>
+      <div class="section-body">
+        <p>For general inquiries about this Privacy Policy, please contact us at <a href="mailto:connect@maritribe.one" style="color: var(--bottle-green); font-weight: 600;">connect@maritribe.one</a></p>
+      </div>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Maritribe</div>
+      <p class="footer-meta">
+        <a href="index.html">maritribe.one</a> &nbsp;·&nbsp; connect@maritribe.one
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
