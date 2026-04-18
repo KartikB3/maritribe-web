@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["APPLETEAMID.one.maritribe.app"],
+        "components": [
+          { "/": "/p/*", "comment": "Post deep links" },
+          { "/": "/c/*", "comment": "Community invite deep links" },
+          { "/": "/invite", "comment": "App invite landing" },
+          { "/": "/invite/*", "comment": "App invite with token" }
+        ]
+      }
+    ]
+  }
+}

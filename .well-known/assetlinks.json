@@ -2,9 +2,9 @@
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.example.tpo_app",
+    "package_name": "one.maritribe.app",
     "sha256_cert_fingerprints": [
-      "3A:84:CC:69:0B:1A:B4:E7:04:64:7C:C4:7F:DE:5F:54:08:9C:52:E4:B1:A5:3F:F6:E3:3C:B1:86:C1:38:8C:6F"
+      "64:67:63:F1:FC:AB:BD:81:F6:FD:7D:AE:AF:64:BE:FB:7D:0A:9C:DD:CD:EE:4A:F3:11:B7:44:5F:52:55:0B:34"
     ]
   }
 }]

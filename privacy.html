@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --bottle-green: #0F4A3C;
@@ -25,8 +28,15 @@
       --text-secondary: #6B7280;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -47,7 +57,12 @@
       background-size: 256px 256px;
     }
 
-    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+    h1,
+    h2,
+    h3 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+    }
 
     /* ── Nav ── */
     nav {
@@ -55,7 +70,7 @@
       top: 0;
       z-index: 100;
       background: var(--deep-teal);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding: 0 24px;
       height: 56px;
       display: flex;
@@ -67,14 +82,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.75);
+      color: rgba(255, 255, 255, 0.75);
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
       transition: color 0.2s;
     }
 
-    .nav-back:hover { color: var(--mint-light); }
+    .nav-back:hover {
+      color: var(--mint-light);
+    }
 
     .nav-back svg {
       width: 16px;
@@ -96,7 +113,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .hero::before {
@@ -138,7 +155,7 @@
 
     .hero-sub {
       font-size: 14px;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255, 255, 255, 0.4);
       font-weight: 500;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -176,7 +193,9 @@
     }
 
     @media (max-width: 520px) {
-      .toc-grid { grid-template-columns: 1fr; }
+      .toc-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .toc-item {
@@ -191,7 +210,9 @@
       transition: color 0.15s;
     }
 
-    .toc-item:hover { color: var(--bottle-green); }
+    .toc-item:hover {
+      color: var(--bottle-green);
+    }
 
     .toc-num {
       font-size: 11px;
@@ -211,8 +232,15 @@
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .section-header {
@@ -227,7 +255,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(85,24,65,0.1);
+      background: rgba(85, 24, 65, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -250,8 +278,13 @@
       color: #374151;
     }
 
-    .section-body p { margin-bottom: 12px; }
-    .section-body p:last-child { margin-bottom: 0; }
+    .section-body p {
+      margin-bottom: 12px;
+    }
+
+    .section-body p:last-child {
+      margin-bottom: 0;
+    }
 
     .section-body ul {
       list-style: none;
@@ -278,7 +311,9 @@
       padding-left: 20px;
     }
 
-    .section-body ol li { padding: 3px 0; }
+    .section-body ol li {
+      padding: 3px 0;
+    }
 
     .sub-section {
       margin-bottom: 16px;
@@ -332,7 +367,9 @@
       font-weight: 600;
     }
 
-    .grievance-card .g-email a:hover { text-decoration: underline; }
+    .grievance-card .g-email a:hover {
+      text-decoration: underline;
+    }
 
     .grievance-card .g-timing {
       display: flex;
@@ -356,7 +393,9 @@
     }
 
     @media (max-width: 520px) {
-      .grievance-card { grid-template-columns: 1fr; }
+      .grievance-card {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── Footer ── */
@@ -390,13 +429,15 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Nav -->
   <nav>
     <a href="index.html" class="nav-back">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M10 12L6 8l4-4"/>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M10 12L6 8l4-4" />
       </svg>
       Back to maritribe.one
     </a>
@@ -440,9 +481,14 @@
         <h2 class="section-title">Introduction</h2>
       </div>
       <div class="section-body">
-        <p>We at MaritribeOne Alumni Network ("Platform", "we", "us", "our") recognize that your privacy is very important and take it seriously. This Privacy Policy describes how we collect, use, disclose, and transfer personal information of users through our website and mobile application.</p>
-        <p>This Privacy Policy is compliant with the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and the Digital Personal Data Protection Act, 2023 (DPDP Act).</p>
-        <p>By using this Platform, you agree to the terms of this Privacy Policy. If you do not agree, please do not use this Platform.</p>
+        <p>We at MaritribeOne Alumni Network ("Platform", "we", "us", "our") recognize that your privacy is very
+          important and take it seriously. This Privacy Policy describes how we collect, use, disclose, and transfer
+          personal information of users through our website and mobile application.</p>
+        <p>This Privacy Policy is compliant with the Information Technology Act, 2000, the Information Technology
+          (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and the
+          Digital Personal Data Protection Act, 2023 (DPDP Act).</p>
+        <p>By using this Platform, you agree to the terms of this Privacy Policy. If you do not agree, please do not use
+          this Platform.</p>
       </div>
     </div>
 
@@ -476,44 +522,75 @@
         </div>
         <div class="sub-section">
           <div class="sub-label">2.3 Content You Share</div>
-          <p>Any content you post on the Platform including posts, comments, messages, and media files becomes part of your information. Posts made in public communities are visible to all members. Direct messages are stored to facilitate delivery but are not monitored by us.</p>
+          <p>Any content you post on the Platform including posts, comments, messages, and media files becomes part of
+            your information. Posts made in public communities are visible to all members. Direct messages are stored to
+            facilitate delivery but are not monitored by us.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.4 Third-Party Sign-In</div>
-          <p>If you choose to sign in using Google OAuth, we collect your name, email address, and profile picture as made available through your Google account.</p>
+          <p>If you choose to sign in using Google OAuth, we collect your name, email address, and profile picture as
+            made available through your Google account.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.5 Device Contacts</div>
-          <p>With your explicit, runtime-granted permission, the Platform reads names and phone numbers from your device address book for the sole purpose of identifying which of your contacts are already Maritribe members and helping you invite contacts who are not yet members. Contact data is processed only to enable this feature, is never sold, rented, or shared with third parties for advertising, and is not used to build profiles about non-members.</p>
-          <p>With your permission, the Platform may also save a Maritribe member's contact details to your device's address book — but only when you explicitly request it (for example, by tapping a "Save to Contacts" action on a member's profile). No contact information is written to your device without that explicit action.</p>
-          <p>You may revoke contacts permission at any time through your device's operating system settings. Revoking permission disables the contact-matching and save-to-contacts features but does not otherwise affect your account.</p>
+          <p>With your explicit, runtime-granted permission, the Platform reads names and phone numbers from your device
+            address book for the sole purpose of identifying which of your contacts are already Maritribe members and
+            helping you invite contacts who are not yet members. Contact data is processed only to enable this feature,
+            is never sold, rented, or shared with third parties for advertising, and is not used to build profiles about
+            non-members.</p>
+          <p>With your permission, the Platform may also save a Maritribe member's contact details to your device's
+            address book — but only when you explicitly request it (for example, by tapping a "Save to Contacts" action
+            on a member's profile). No contact information is written to your device without that explicit action.</p>
+          <p>You may revoke contacts permission at any time through your device's operating system settings. Revoking
+            permission disables the contact-matching and save-to-contacts features but does not otherwise affect your
+            account.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.6 Photos, Media, and Camera</div>
-          <p>When you choose to upload a profile photograph, community banner, or media attached to a post or message, the Platform accesses only the specific images you select from your device's gallery or capture via your camera. We do not scan, index, or access your broader media library. Selected images may be cropped on-device before upload.</p>
+          <p>When you choose to upload a profile photograph, community banner, or media attached to a post or message,
+            the Platform accesses only the specific images you select from your device's gallery or capture via your
+            camera. We do not scan, index, or access your broader media library. Selected images may be cropped
+            on-device before upload.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.7 Push Notifications</div>
-          <p>To deliver push notifications, the mobile application registers your device with Firebase Cloud Messaging (operated by Google LLC) and receives a device-specific notification token. This token is linked to your account and used only to deliver notifications relevant to your activity on the Platform (such as replies, mentions, direct messages, and institutional announcements). You may disable notifications at any time from your device settings; doing so will not otherwise affect your account.</p>
+          <p>To deliver push notifications, the mobile application registers your device with Firebase Cloud Messaging
+            (operated by Google LLC) and receives a device-specific notification token. This token is linked to your
+            account and used only to deliver notifications relevant to your activity on the Platform (such as replies,
+            mentions, direct messages, and institutional announcements). You may disable notifications at any time from
+            your device settings; doing so will not otherwise affect your account.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.8 Diagnostics and Product Analytics</div>
           <p>To keep the Platform stable and understand how it is used, we use the following services:</p>
           <ul>
-            <li><strong>Firebase Crashlytics (Google LLC):</strong> Collects crash reports, stack traces, device model, operating system version, and non-personal diagnostic data when the application encounters an error, so we can identify and fix bugs.</li>
-            <li><strong>Microsoft Clarity (Microsoft Corporation):</strong> Collects anonymized in-app interaction data including screens visited, taps, scrolls, and session replays to help us improve usability. Personally identifiable input fields are masked by default; Clarity does not capture passwords, one-time passcodes, or payment details.</li>
+            <li><strong>Firebase Crashlytics (Google LLC):</strong> Collects crash reports, stack traces, device model,
+              operating system version, and non-personal diagnostic data when the application encounters an error, so we
+              can identify and fix bugs.</li>
+            <li><strong>Microsoft Clarity (Microsoft Corporation):</strong> Collects anonymized in-app interaction data
+              including screens visited, taps, scrolls, and session replays to help us improve usability. Personally
+              identifiable input fields are masked by default; Clarity does not capture passwords, one-time passcodes,
+              or payment details.</li>
           </ul>
-          <p>These services do not receive your device contact list, the contents of your direct messages, or media you have not chosen to share. Data collected through these services is governed by the respective providers' privacy policies.</p>
+          <p>These services do not receive your device contact list, the contents of your direct messages, or media you
+            have not chosen to share. Data collected through these services is governed by the respective providers'
+            privacy policies.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">2.9 Device Permissions Summary</div>
-          <p>For full transparency, the Maritribe mobile application requests the following Android and iOS permissions. Sensitive permissions are runtime-prompted and optional; features depending on a denied permission are disabled, but the rest of the application continues to function:</p>
+          <p>For full transparency, the Maritribe mobile application requests the following Android and iOS permissions.
+            Sensitive permissions are runtime-prompted and optional; features depending on a denied permission are
+            disabled, but the rest of the application continues to function:</p>
           <ul>
             <li><strong>Internet:</strong> Required to communicate with Platform servers.</li>
-            <li><strong>Notifications (<code>POST_NOTIFICATIONS</code>):</strong> To deliver push notifications you have opted into.</li>
-            <li><strong>Photos / Media (<code>READ_MEDIA_IMAGES</code>):</strong> To let you pick images to upload as profile photos, banners, or post/message attachments.</li>
-            <li><strong>Contacts read (<code>READ_CONTACTS</code>):</strong> To match your device contacts against existing Maritribe members, as described in Section 2.5.</li>
-            <li><strong>Contacts write (<code>WRITE_CONTACTS</code>):</strong> To save a Maritribe member's contact details to your device address book only when you explicitly request it, as described in Section 2.5.</li>
+            <li><strong>Notifications (<code>POST_NOTIFICATIONS</code>):</strong> To deliver push notifications you have
+              opted into.</li>
+            <li><strong>Photos / Media (<code>READ_MEDIA_IMAGES</code>):</strong> To let you pick images to upload as
+              profile photos, banners, or post/message attachments.</li>
+            <li><strong>Contacts read (<code>READ_CONTACTS</code>):</strong> To match your device contacts against
+              existing Maritribe members, as described in Section 2.5.</li>
+            <li><strong>Contacts write (<code>WRITE_CONTACTS</code>):</strong> To save a Maritribe member's contact
+              details to your device address book only when you explicitly request it, as described in Section 2.5.</li>
           </ul>
         </div>
       </div>
@@ -549,15 +626,20 @@
       <div class="section-body">
         <div class="sub-section">
           <div class="sub-label">4.1 Content Visible to Others</div>
-          <p>Public content you post in communities is accessible to all Platform members. Your profile information (name, batch, current status) is visible to other verified members. We do <strong>not</strong> share your phone number or email address with other members without your explicit consent.</p>
+          <p>Public content you post in communities is accessible to all Platform members. Your profile information
+            (name, batch, current status) is visible to other verified members. We do <strong>not</strong> share your
+            phone number or email address with other members without your explicit consent.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">4.2 Sharing with Institution</div>
-          <p>Institute administrators (where signed up) have access to member profiles for verification purposes and may view aggregate analytics. They may also access flagged content for moderation purposes.</p>
+          <p>Institute administrators (where signed up) have access to member profiles for verification purposes and may
+            view aggregate analytics. They may also access flagged content for moderation purposes.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">4.3 Legal Requirements</div>
-          <p>We may disclose your information to comply with applicable laws, court orders, or legal process; to investigate, prevent, or take action regarding illegal activities, suspected fraud, or violations of our Terms; or to protect the rights, property, or safety of our users or the public.</p>
+          <p>We may disclose your information to comply with applicable laws, court orders, or legal process; to
+            investigate, prevent, or take action regarding illegal activities, suspected fraud, or violations of our
+            Terms; or to protect the rights, property, or safety of our users or the public.</p>
         </div>
         <div class="sub-section">
           <div class="sub-label">4.4 No Sale of Personal Information</div>
@@ -565,13 +647,20 @@
         </div>
         <div class="sub-section">
           <div class="sub-label">4.5 Third-Party Service Providers (Data Processors)</div>
-          <p>We rely on a limited set of trusted service providers to operate the Platform. These providers process data only on our instructions and are bound by contractual confidentiality and data-protection obligations. They are not permitted to use your personal information for their own independent purposes such as advertising or profile building.</p>
+          <p>We rely on a limited set of trusted service providers to operate the Platform. These providers process data
+            only on our instructions and are bound by contractual confidentiality and data-protection obligations. They
+            are not permitted to use your personal information for their own independent purposes such as advertising or
+            profile building.</p>
           <ul>
-            <li><strong>Google LLC</strong> — Google Sign-In (authentication), Firebase Cloud Messaging (push notification delivery), and Firebase Crashlytics (crash and stability diagnostics).</li>
-            <li><strong>Microsoft Corporation</strong> — Microsoft Clarity (anonymized product analytics and session insights).</li>
-            <li><strong>Cloud infrastructure providers</strong> with servers located in India, used for application hosting, database storage, and media storage in support of data-localization requirements.</li>
+            <li><strong>Google LLC</strong> — Google Sign-In (authentication), Firebase Cloud Messaging (push
+              notification delivery), and Firebase Crashlytics (crash and stability diagnostics).</li>
+            <li><strong>Microsoft Corporation</strong> — Microsoft Clarity (anonymized product analytics and session
+              insights).</li>
+            <li><strong>Cloud infrastructure providers</strong> with servers located in India, used for application
+              hosting, database storage, and media storage in support of data-localization requirements.</li>
           </ul>
-          <p>A current list of sub-processors can be requested from our Grievance Officer at the contact details below.</p>
+          <p>A current list of sub-processors can be requested from our Grievance Officer at the contact details below.
+          </p>
         </div>
       </div>
     </div>
@@ -583,8 +672,12 @@
         <h2 class="section-title">Data Security</h2>
       </div>
       <div class="section-body">
-        <p>We implement industry-standard security measures to protect your personal information including encryption of data in transit and at rest, secure authentication mechanisms, and access controls limiting data access to authorized personnel. However, no method of transmission over the Internet is completely secure, and we cannot guarantee absolute security.</p>
-        <p>We use trusted cloud hosting providers with servers located in India, ensuring compliance with data localization requirements under applicable law.</p>
+        <p>We implement industry-standard security measures to protect your personal information including encryption of
+          data in transit and at rest, secure authentication mechanisms, and access controls limiting data access to
+          authorized personnel. However, no method of transmission over the Internet is completely secure, and we cannot
+          guarantee absolute security.</p>
+        <p>We use trusted cloud hosting providers with servers located in India, ensuring compliance with data
+          localization requirements under applicable law.</p>
       </div>
     </div>
 
@@ -595,7 +688,10 @@
         <h2 class="section-title">Data Retention</h2>
       </div>
       <div class="section-body">
-        <p>We retain your personal information for as long as your account is active or as needed to provide you services. If you delete your account, we will delete or anonymize your personal information within 90 days, except where retention is required for legal obligations or legitimate business purposes. Some content may remain if it has been shared or quoted by other users.</p>
+        <p>We retain your personal information for as long as your account is active or as needed to provide you
+          services. If you delete your account, we will delete or anonymize your personal information within 90 days,
+          except where retention is required for legal obligations or legitimate business purposes. Some content may
+          remain if it has been shared or quoted by other users.</p>
       </div>
     </div>
 
@@ -608,13 +704,16 @@
       <div class="section-body">
         <p>Under the Digital Personal Data Protection Act, 2023 and applicable laws, you have the following rights:</p>
         <ul>
-          <li><strong>Right to Access:</strong> Obtain confirmation of whether your personal data is being processed and access to such data</li>
+          <li><strong>Right to Access:</strong> Obtain confirmation of whether your personal data is being processed and
+            access to such data</li>
           <li><strong>Right to Correction:</strong> Request correction of inaccurate or incomplete personal data</li>
-          <li><strong>Right to Erasure:</strong> Request deletion of your personal data subject to legal requirements</li>
+          <li><strong>Right to Erasure:</strong> Request deletion of your personal data subject to legal requirements
+          </li>
           <li><strong>Right to Withdraw Consent:</strong> Withdraw consent for processing at any time</li>
           <li><strong>Right to Grievance Redressal:</strong> Lodge complaints regarding data processing</li>
         </ul>
-        <p>To exercise these rights, contact our Grievance Officer at the address provided below. We will respond to your request within 30 days.</p>
+        <p>To exercise these rights, contact our Grievance Officer at the address provided below. We will respond to
+          your request within 30 days.</p>
       </div>
     </div>
 
@@ -625,7 +724,9 @@
         <h2 class="section-title">Cookies and Tracking Technologies</h2>
       </div>
       <div class="section-body">
-        <p>We use cookies and similar technologies to enhance your experience, remember your preferences, and analyze Platform usage. You can control cookie settings through your browser, but disabling cookies may limit certain Platform functionality.</p>
+        <p>We use cookies and similar technologies to enhance your experience, remember your preferences, and analyze
+          Platform usage. You can control cookie settings through your browser, but disabling cookies may limit certain
+          Platform functionality.</p>
       </div>
     </div>
 
@@ -636,7 +737,9 @@
         <h2 class="section-title">Children's Privacy</h2>
       </div>
       <div class="section-body">
-        <p>The Platform is intended for maritime professionals who are 18 years or older. We do not knowingly collect personal information from children under 18. If we become aware that we have collected such information, we will take steps to delete it.</p>
+        <p>The Platform is intended for maritime professionals who are 18 years or older. We do not knowingly collect
+          personal information from children under 18. If we become aware that we have collected such information, we
+          will take steps to delete it.</p>
       </div>
     </div>
 
@@ -647,7 +750,9 @@
         <h2 class="section-title">Changes to This Policy</h2>
       </div>
       <div class="section-body">
-        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through in-app notifications or email. Your continued use of the Platform after changes constitute acceptance of the updated policy.</p>
+        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes through in-app
+          notifications or email. Your continued use of the Platform after changes constitute acceptance of the updated
+          policy.</p>
       </div>
     </div>
 
@@ -658,13 +763,14 @@
         <h2 class="section-title">Grievance Officer</h2>
       </div>
       <div class="section-body">
-        <p>In accordance with the Information Technology Act, 2000 and IT Rules 2021, we have appointed a Grievance Officer to address your concerns regarding data privacy and Platform usage:</p>
+        <p>In accordance with the Information Technology Act, 2000 and IT Rules 2021, we have appointed a Grievance
+          Officer to address your concerns regarding data privacy and Platform usage:</p>
         <div class="grievance-card">
           <div>
             <div class="g-label">Grievance Officer</div>
             <div class="g-name">MariTribeOne</div>
             <div class="g-email">
-              Maharashtra Academy of Naval Education and Training, Pune<br>
+              MariTribeOne, Mumbai<br>
               Email: <a href="mailto:connect@maritribe.one">connect@maritribe.one</a>
             </div>
           </div>
@@ -684,7 +790,8 @@
         <h2 class="section-title">Contact Us</h2>
       </div>
       <div class="section-body">
-        <p>For general inquiries about this Privacy Policy, please contact us at <a href="mailto:connect@maritribe.one" style="color: var(--bottle-green); font-weight: 600;">connect@maritribe.one</a></p>
+        <p>For general inquiries about this Privacy Policy, please contact us at <a href="mailto:connect@maritribe.one"
+            style="color: var(--bottle-green); font-weight: 600;">connect@maritribe.one</a></p>
       </div>
     </div>
 
@@ -701,4 +808,5 @@
   </footer>
 
 </body>
+
 </html>
