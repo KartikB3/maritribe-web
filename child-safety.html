@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Child Safety Standards — Maritribe</title>
+  <meta name="description" content="Maritribe's published standards against child sexual abuse and exploitation (CSAE).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bottle-green: #0F4A3C;
+      --jam: #551841;
+      --jam-mid: #6B1740;
+      --jam-light: #8B2252;
+      --mint: #10B981;
+      --mint-light: #34D399;
+      --ivory: #F5F2E6;
+      --ivory-dark: #E7E3D6;
+      --gold: #C9A84C;
+      --deep-teal: #0A2E24;
+      --text-primary: #111827;
+      --text-secondary: #6B7280;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--ivory);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--deep-teal);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--mint-light); }
+    .nav-back svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      color: white;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .hero {
+      background: var(--deep-teal);
+      padding: 72px 24px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hero::before {
+      content: '🧭';
+      position: absolute;
+      font-size: 320px;
+      line-height: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.03;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero-inner::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+      border-radius: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .page-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .intro-card {
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-left: 3px solid var(--bottle-green);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #374151;
+    }
+    .intro-card p { margin-bottom: 8px; }
+    .intro-card p:last-child { margin-bottom: 0; }
+
+    .toc {
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    @media (max-width: 520px) { .toc-grid { grid-template-columns: 1fr; } }
+
+    .toc-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 0;
+      transition: color 0.15s;
+    }
+    .toc-item:hover { color: var(--bottle-green); }
+
+    .toc-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--jam);
+      min-width: 18px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: fadeInUp 0.4s ease both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--ivory-dark);
+    }
+
+    .section-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(85,24,65,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--jam);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--bottle-green);
+    }
+
+    .section-body {
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #374151;
+    }
+    .section-body p { margin-bottom: 12px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .section-body ul {
+      list-style: none;
+      margin: 8px 0 12px;
+      padding: 0;
+    }
+    .section-body ul li {
+      display: flex;
+      gap: 10px;
+      padding: 4px 0;
+    }
+    .section-body ul li::before {
+      content: '•';
+      color: var(--jam);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sub-section { margin-bottom: 16px; }
+    .sub-label {
+      font-weight: 700;
+      color: var(--bottle-green);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .grievance-card {
+      background: var(--ivory);
+      border: 1px solid var(--ivory-dark);
+      border-left: 3px solid var(--bottle-green);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px 24px;
+      align-items: start;
+    }
+
+    .grievance-card .g-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--bottle-green);
+      margin-bottom: 4px;
+    }
+    .grievance-card .g-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .grievance-card .g-email { font-size: 13px; color: var(--text-secondary); }
+    .grievance-card .g-email a {
+      color: var(--bottle-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .grievance-card .g-email a:hover { text-decoration: underline; }
+
+    .grievance-card .g-timing {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-self: center;
+    }
+    .grievance-card .g-timing span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: white;
+      border: 1px solid var(--ivory-dark);
+      border-radius: 100px;
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+    @media (max-width: 520px) {
+      .grievance-card { grid-template-columns: 1fr; }
+    }
+
+    footer {
+      border-top: 1px solid var(--ivory-dark);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 780px; margin: 0 auto; }
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--bottle-green);
+      margin-bottom: 6px;
+    }
+    .footer-meta { font-size: 13px; color: var(--text-secondary); }
+    .footer-meta a {
+      color: var(--bottle-green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12L6 8l4-4"/>
+      </svg>
+      Back to maritribe.one
+    </a>
+    <span class="nav-brand">Maritribe</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>Child Safety Standards</h1>
+      <p class="hero-sub">Maritribe &nbsp;·&nbsp; Last Updated: April 2026</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="page-wrapper">
+
+    <div class="intro-card">
+      <p>Maritribe is a professional networking platform for maritime professionals aged 18 years and older. We have zero tolerance for child sexual abuse and exploitation (CSAE), and for any child sexual abuse material (CSAM) on our Platform.</p>
+      <p>This document sets out Maritribe's published standards for preventing, detecting, and responding to CSAE, in compliance with the Google Play Child Safety Standards Policy, the Apple App Store guidelines, and applicable laws including the Protection of Children from Sexual Offences Act, 2012 (POCSO Act) and the Information Technology Act, 2000 of India.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <div class="toc-grid">
+        <a href="#s1" class="toc-item"><span class="toc-num">1</span> Our Commitment</a>
+        <a href="#s2" class="toc-item"><span class="toc-num">2</span> Platform Audience</a>
+        <a href="#s3" class="toc-item"><span class="toc-num">3</span> Prohibited Conduct</a>
+        <a href="#s4" class="toc-item"><span class="toc-num">4</span> Prevention Measures</a>
+        <a href="#s5" class="toc-item"><span class="toc-num">5</span> In-App Reporting</a>
+        <a href="#s6" class="toc-item"><span class="toc-num">6</span> Response &amp; Enforcement</a>
+        <a href="#s7" class="toc-item"><span class="toc-num">7</span> Legal Reporting</a>
+        <a href="#s8" class="toc-item"><span class="toc-num">8</span> External Resources</a>
+        <a href="#s9" class="toc-item"><span class="toc-num">9</span> Point of Contact</a>
+        <a href="#s10" class="toc-item"><span class="toc-num">10</span> Updates</a>
+      </div>
+    </div>
+
+    <!-- 1 -->
+    <div class="section" id="s1" style="animation-delay:0.05s">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2 class="section-title">Our Commitment</h2>
+      </div>
+      <div class="section-body">
+        <p>Maritribe is committed to providing a safe environment that is free from the sexual abuse and exploitation of children. Our commitments include:</p>
+        <ul>
+          <li>Zero tolerance for CSAM and any form of child sexual abuse or exploitation on the Platform.</li>
+          <li>Proactive prevention through platform design, age restrictions, and moderation.</li>
+          <li>Rapid response when such material or conduct is identified or reported.</li>
+          <li>Compliance with all applicable child safety laws, including mandatory reporting obligations.</li>
+          <li>Cooperation with law enforcement and recognised child safety organisations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="section" id="s2" style="animation-delay:0.08s">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2 class="section-title">Platform Audience</h2>
+      </div>
+      <div class="section-body">
+        <p>Maritribe is intended exclusively for adult maritime professionals — alumni, cadets, officers, and industry members — who are <strong>18 years of age or older</strong>. The Platform is not designed for, marketed to, or intended to be used by children.</p>
+        <p>Access to Maritribe is gated by institutional verification: new accounts require affiliation with a verified maritime institution and approval by a designated administrator before gaining full access. Accounts found to be operated by minors are removed.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="section" id="s3" style="animation-delay:0.11s">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2 class="section-title">Prohibited Conduct</h2>
+      </div>
+      <div class="section-body">
+        <p>The following are strictly prohibited on Maritribe and will result in immediate removal, permanent account termination, and — where required by law — reporting to the relevant authorities:</p>
+        <ul>
+          <li>Child sexual abuse material (CSAM) in any form, including real, animated, computer-generated, or AI-generated depictions.</li>
+          <li>Sexualised content involving minors, whether explicit or implied.</li>
+          <li>Grooming, solicitation, sextortion, or any attempt to sexually exploit a child.</li>
+          <li>Sharing, requesting, or linking to CSAM, including via direct messages or third-party links.</li>
+          <li>Non-consensual intimate imagery of any person, including minors.</li>
+          <li>Glorification, normalisation, or trivialisation of child sexual abuse.</li>
+          <li>Identifying, exposing, or disclosing the identity of a child victim of sexual abuse.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="section" id="s4" style="animation-delay:0.14s">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2 class="section-title">Prevention Measures</h2>
+      </div>
+      <div class="section-body">
+
+        <div class="sub-section">
+          <div class="sub-label">4.1 Age Gating &amp; Verification</div>
+          <p>Users must attest to being at least 18 years old at sign-up. Institutional verification by an approved administrator is required before an account can post, comment, or send direct messages.</p>
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-label">4.2 Moderation</div>
+          <p>Maritribe operates a two-tier moderation system:</p>
+          <ul>
+            <li><strong>College/Institution Administrators</strong> — verify affiliations and oversee institutional communities.</li>
+            <li><strong>Community Moderators</strong> — review reports, remove violating content, and escalate serious concerns.</li>
+          </ul>
+          <p>All moderation actions are recorded in an audit log. Content flagged as potentially CSAE is removed pending review and preserved for law enforcement as required.</p>
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-label">4.3 Safeguards on Direct Messaging</div>
+          <p>Direct messages are rate-limited to prevent mass outreach and spam. Users can block other members, decline message requests, and report messages without the other party being notified.</p>
+        </div>
+
+        <div class="sub-section">
+          <div class="sub-label">4.4 Staff Training</div>
+          <p>Team members involved in trust &amp; safety review materials from the Internet Watch Foundation (IWF), the National Center for Missing &amp; Exploited Children (NCMEC), and INHOPE regarding the identification and handling of CSAE.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="section" id="s5" style="animation-delay:0.17s">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2 class="section-title">In-App Reporting</h2>
+      </div>
+      <div class="section-body">
+        <p>Every post, comment, profile, and direct message on Maritribe includes a <strong>Report</strong> option accessible from the overflow (⋯) menu. Users can select <em>"Child safety concern / CSAE"</em> as a report category.</p>
+        <p>Reports submitted through this channel are routed directly to Maritribe's trust &amp; safety queue and are prioritised for immediate review. Reporters can remain anonymous to the reported user.</p>
+        <p>Reports can also be sent by email to the point of contact listed below. No registration is required to submit a report by email.</p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="section" id="s6" style="animation-delay:0.20s">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h2 class="section-title">Response &amp; Enforcement</h2>
+      </div>
+      <div class="section-body">
+        <p>When a CSAE report is received, Maritribe will:</p>
+        <ul>
+          <li>Acknowledge the report within 24 hours.</li>
+          <li>Remove the reported content from public view immediately, pending review.</li>
+          <li>Preserve the content, associated metadata, and account data for law enforcement as required by law.</li>
+          <li>Permanently terminate accounts found to have uploaded, shared, or solicited CSAM.</li>
+          <li>Report confirmed CSAM to the relevant regional and national authorities as set out in section 7.</li>
+          <li>Cooperate with lawful requests from law enforcement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="section" id="s7" style="animation-delay:0.23s">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <h2 class="section-title">Legal Reporting</h2>
+      </div>
+      <div class="section-body">
+        <p>Maritribe complies with mandatory reporting obligations under applicable law. Confirmed CSAM and credible CSAE concerns are reported to:</p>
+        <ul>
+          <li><strong>National Cyber Crime Reporting Portal (India)</strong> — <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">cybercrime.gov.in</a></li>
+          <li><strong>Local law enforcement</strong> under the POCSO Act, 2012 and the IT Act, 2000 (India).</li>
+          <li><strong>National Center for Missing &amp; Exploited Children (NCMEC)</strong> CyberTipline — <a href="https://report.cybertip.org" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">report.cybertip.org</a> — for content with a U.S. nexus.</li>
+          <li>The relevant national hotline in the user's jurisdiction via the <strong>INHOPE</strong> network.</li>
+        </ul>
+        <p>Maritribe preserves user records and content in accordance with legal preservation requests and cooperates with lawful disclosure orders.</p>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="section" id="s8" style="animation-delay:0.26s">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <h2 class="section-title">External Resources</h2>
+      </div>
+      <div class="section-body">
+        <p>If you or someone you know is in immediate danger, contact local emergency services. To report CSAM or seek help:</p>
+        <ul>
+          <li><strong>India — National Cyber Crime Reporting Portal:</strong> <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">cybercrime.gov.in</a></li>
+          <li><strong>India — Childline:</strong> 1098</li>
+          <li><strong>NCMEC CyberTipline (U.S.):</strong> <a href="https://report.cybertip.org" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">report.cybertip.org</a> · 1-800-843-5678</li>
+          <li><strong>Internet Watch Foundation (UK/International):</strong> <a href="https://www.iwf.org.uk/report" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">iwf.org.uk/report</a></li>
+          <li><strong>INHOPE (global hotline network):</strong> <a href="https://www.inhope.org" target="_blank" rel="noopener" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">inhope.org</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="section" id="s9" style="animation-delay:0.29s">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <h2 class="section-title">Point of Contact</h2>
+      </div>
+      <div class="section-body">
+        <p>Maritribe has designated a point of contact for child safety matters. This person is authorised to discuss Maritribe's CSAM prevention practices and compliance with regulators, law enforcement, and app store operators.</p>
+        <div class="grievance-card">
+          <div>
+            <div class="g-label">Child Safety Contact</div>
+            <div class="g-name">Maritribe Trust &amp; Safety</div>
+            <div class="g-email">Email: <a href="mailto:maritribe1305@gmail.com">maritribe1305@gmail.com</a></div>
+          </div>
+          <div class="g-timing">
+            <span>⏱ Acknowledged within 24 hours</span>
+            <span>✓ Action within 72 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="section" id="s10" style="animation-delay:0.32s">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <h2 class="section-title">Updates</h2>
+      </div>
+      <div class="section-body">
+        <p>Maritribe reviews these standards at least annually and whenever our practices, the Platform, or applicable law change materially. The current version is always available at <a href="https://maritribe.one/child-safety.html" style="color:var(--bottle-green);font-weight:600;text-decoration:none;">maritribe.one/child-safety.html</a>.</p>
+      </div>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">Maritribe</div>
+      <p class="footer-meta">
+        <a href="index.html">maritribe.one</a> &nbsp;·&nbsp; maritribe1305@gmail.com &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="terms.html">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
