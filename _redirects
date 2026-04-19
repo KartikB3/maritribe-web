@@ -1,0 +1,4 @@
+/p/*       /404.html  200
+/c/*       /404.html  200
+/invite    /404.html  200
+/invite/*  /404.html  200
