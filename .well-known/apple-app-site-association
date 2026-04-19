@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["APPLETEAMID.one.maritribe.app"],
+        "appIDs": ["UU5LKC4475.one.maritribe.app"],
         "components": [
           { "/": "/p/*", "comment": "Post deep links" },
           { "/": "/c/*", "comment": "Community invite deep links" },
